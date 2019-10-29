@@ -10,7 +10,7 @@ import java.util.Observer;
 
 /**
  *
- * @author Gaby
+ * @author Ian Rodriguez
  */
 public class ViewVuelo extends javax.swing.JInternalFrame implements Observer  {
 

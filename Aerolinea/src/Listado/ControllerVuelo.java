@@ -7,7 +7,7 @@ package Listado;
 
 /**
  *
- * @author Gaby
+ * @author Ian Rodriguez
  */
 public class ControllerVuelo {
        ModelVuelo model;

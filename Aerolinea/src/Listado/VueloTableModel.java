@@ -13,7 +13,7 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author Gaby
+ * @author Ian Rodriguez
  */
 public class VueloTableModel extends AbstractTableModel {
 

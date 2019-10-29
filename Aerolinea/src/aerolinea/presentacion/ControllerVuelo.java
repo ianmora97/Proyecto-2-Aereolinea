@@ -6,7 +6,7 @@ import aerolinea.logica.Vuelo;
 
 
 public class ControllerVuelo {
-     ModelVuelo model;
+    ModelVuelo model;
     ViewVuelo view;
 
     public ControllerVuelo(ModelVuelo m, ViewVuelo v) {
@@ -23,7 +23,6 @@ public class ControllerVuelo {
         } catch (Exception ex) {
             model.setVuelo(new Vuelo(id, "", new Ciudad(), new Ciudad()));
         }
-
     }
 
     public void show() {

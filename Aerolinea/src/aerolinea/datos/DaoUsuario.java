@@ -51,88 +51,36 @@ public class DaoUsuario {
         }
     }
 
-    public void UsuarioUpdate(Usuario u) throws Exception{
-        String sql="update usuario set idUsuario='%s', contrasenna='%s', "
-                + "nombre='%s', apellidos='%s', correo='%s', "
-                + "fechaNacimiento='%s' ,direccion='%s', "
-                + "telefonoTrabajo='%s' ,celular='%s' "
-                + "where idUsuario='%s'";
-        sql=String.format(sql,u.);
-        
+     public void UsuarioUpdate(Usuario u) throws Exception{
+        String sql="update usuario set idUsuario='%s' ,contrasenna='%s', nombre='%s', apellidos='%s', "
+          + "correo='%s', fechaNacimiento='%s', direccion='%s', telefonoTrabajo='%s', celular='%s'"+
+                "where idUsuario='%s'";
+        sql=String.format(sql, u.getIdUsuario(), u.getContrasenna(), 
+                u.getNombre(), u.getApellidos() ,u.getCorreo(),u.getFechaNacimiento(),
+                u.getDireccion(),u.getTelefonoTrabajo(),u.getCelular(), u.getIdUsuario());
+
         int count=db.executeUpdate(sql);
         if (count==0){
-            throw new Exception("Usuario no existe");
+            throw new Exception("El usuario no existe");
         }
     }
     
-    public List<Vuelo> VueloSearch(String dia){//preguntar
-        List<Vuelo> resultado = new ArrayList<Vuelo>();
+    public List<Usuario> UsuarioSearch(String usuario){//preguntar
+        List<Usuario> resultado = new ArrayList<Usuario>();
         try {
             String sql="select * "+
-                    "from vuelo v inner join Ciudad e on v.Ciudad_codigo=e.codigo "+
-                    "where v.dia like '%%%s%%'";
-            sql=String.format(sql,dia);
+                    "from usuario u "+
+                    "where u.idUsuario like '%%%s%%'";
+            sql=String.format(sql,usuario);
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
-                resultado.add(Vuelo(rs));
+                resultado.add(Usuario(rs));
             }
         } catch (SQLException ex) { }
         return resultado;
 
     }
-         public List<Ciudad> CiudadSearch(String nombre){
-        List<Ciudad> resultado = new ArrayList<Ciudad>();
-      try {
-            String sql="select * "+
-                     "from  Ciudad";
-            
-            sql=String.format(sql,nombre);
-            ResultSet rs =  db.executeQuery(sql);
-            while (rs.next()) {
-                
-                resultado.add(Ciudad(rs));
-            }
-        } catch (SQLException ex) {
-           System.out.println("NO SE PUDO CARGAR ESTADO");
-        }
-        return resultado;
-    }
-  
-//       public Ciudad CiudadGet(String codigo) throws Exception{
-//    String sql="select* "+
-//                     "from  Ciudad e  ";
-//
-//        sql = String.format(sql,codigo);
-//        ResultSet rs =  db.executeQuery(sql);
-//        if (rs.next()) {
-//            return Ciudad(rs);
-//        }
-//        else{
-//            throw new Exception ("Ciudad  no Existe");
-//        }
-//    }
-//            private Pais Pais(ResultSet rs){
-//        try {
-//            Pais p= new Pais();
-//            p.setCodigoPais(rs.getString("codigoPais"));
-//            p.setNombre(rs.getString("nombre"));
-//   return p;
-//        } catch (SQLException ex) {
-//            return null;
-//        }
-//    }
-//            
-//       private Ciudad Ciudad(ResultSet rs){
-//        try {
-//            Ciudad c= new Ciudad();
-//            c.setCodigoCiudad(rs.getString("codigoCiudad"));
-//   c.setNombre(rs.getString("nombre"));
-//   c.setPais(Pais(rs));
-//   return c;
-//        } catch (SQLException ex) {
-//            return null;
-//        }
-//    }
+    
        
     private Usuario Usuario(ResultSet rs){
         try {
@@ -151,22 +99,5 @@ public class DaoUsuario {
             return null;
         }
     }
-    public  List<Ciudad> llenarCombo(){
-     List<Ciudad> resultado = new ArrayList<Ciudad>();
-      try {
-            String sql="select * "+
-                     "from  Ciudad";
-            ResultSet rs =  db.executeQuery(sql);
-            while (rs.next()) {
-                
-                resultado.add(Ciudad(rs));
-            }
-        } catch (SQLException ex) {
-           System.out.println("NO SE PUDO CARGAR CIUDAD");
-        }
-        return resultado;
-    }
-  
-   public  void close(){
-    }
+    
 }
