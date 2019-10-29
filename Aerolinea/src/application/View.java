@@ -11,6 +11,7 @@ public class View extends javax.swing.JFrame implements Observer {
     
     public View() {
         initComponents();
+        
     }
 
     
@@ -28,6 +29,7 @@ public class View extends javax.swing.JFrame implements Observer {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
+        consultarBTN = new javax.swing.JButton();
         menu_principal = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         edicion = new javax.swing.JMenu();
@@ -78,6 +80,13 @@ public class View extends javax.swing.JFrame implements Observer {
             }
         });
 
+        consultarBTN.setText("Consultar Usuarios");
+        consultarBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarBTNActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -103,7 +112,10 @@ public class View extends javax.swing.JFrame implements Observer {
                         .addComponent(jLabel3))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(335, 335, 335)
-                        .addComponent(jButton3)))
+                        .addComponent(jButton3))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(320, 320, 320)
+                        .addComponent(consultarBTN)))
                 .addContainerGap(283, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
@@ -125,7 +137,9 @@ public class View extends javax.swing.JFrame implements Observer {
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(consultarBTN)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         panel.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -135,6 +149,7 @@ public class View extends javax.swing.JFrame implements Observer {
         panel.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jPasswordField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(consultarBTN, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         getContentPane().add(panel);
 
@@ -192,9 +207,15 @@ public class View extends javax.swing.JFrame implements Observer {
         
     }//GEN-LAST:event_jButton3MouseClicked
 
+    private void consultarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarBTNActionPerformed
+        // TODO add your handling code here:
+        controladora.usuariosListadoShow();
+    }//GEN-LAST:event_consultarBTNActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton consultarBTN;
     private javax.swing.JMenu edicion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

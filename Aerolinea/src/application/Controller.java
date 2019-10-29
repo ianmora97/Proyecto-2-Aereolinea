@@ -28,4 +28,7 @@ public class Controller {
     {
         Application.Listado_Controlador.show();
     }
+    public void usuariosListadoShow(){
+        Application.Listado_Usuarios_Controller.show();
+    }
 }

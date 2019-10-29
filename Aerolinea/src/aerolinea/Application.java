@@ -24,15 +24,22 @@ public class Application {
         
         Listado.ControllerVuelo controlador2 = new Listado.ControllerVuelo(modelo2, vista2);
         Listado_Controlador = controlador2;
-       
+        
+        Listado.usuarios.View vistaUsuario = new Listado.usuarios.View();
+        Listado.usuarios.Model modeloUsuario = new Listado.usuarios.Model();
+        Listado.usuarios.Controller controllerUsuario = new Listado.usuarios.Controller(modeloUsuario,vistaUsuario);
+        Listado_Usuarios_Controller = controllerUsuario;
+        
         application.Model modelo3 = new application.Model();
-     application.View vista3 = new application.View();
-     application.Controller controladora3 = new application.Controller(modelo3, vista3);
+        application.View vista3 = new application.View();
+        application.Controller controladora3 = new application.Controller(modelo3, vista3);
        
         
         vista3.panel.add(view);
         vista3.panel.add(vista2);
+        
     }
     public static Listado.ControllerVuelo Listado_Controlador;
     public static ControllerVuelo Edicion_Controlador;
+    public static Listado.usuarios.Controller Listado_Usuarios_Controller;
 }

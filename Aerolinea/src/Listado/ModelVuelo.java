@@ -12,8 +12,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 
-public class ModelVuelo extends Observable
-{
+public class ModelVuelo extends Observable{
    List<Vuelo> vuelos;
     Vuelo filtro;
 
@@ -50,8 +49,9 @@ public class ModelVuelo extends Observable
     public void setFiltro(Vuelo filtro) {
         this.filtro = filtro;
     }
-
-  public void addObserver(Observer o){
+    
+    @Override
+    public void addObserver(Observer o){
         super.addObserver(o);
         this.setChanged();
         this.notifyObservers();   

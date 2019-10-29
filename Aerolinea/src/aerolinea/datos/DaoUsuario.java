@@ -65,13 +65,13 @@ public class DaoUsuario {
         }
     }
     
-    public List<Usuario> UsuarioSearch(String usuario){//preguntar
+    public List<Usuario> UsuarioSearch(String usuario){
         List<Usuario> resultado = new ArrayList<Usuario>();
         try {
-            String sql="select * "+
-                    "from usuario u "+
-                    "where u.idUsuario like '%%%s%%'";
-            sql=String.format(sql,usuario);
+            String sql = "select * "+
+                         "from usuario u "+
+                         "where u.idUsuario like '%%%s%%'";
+            sql = String.format(sql, usuario);
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
                 resultado.add(Usuario(rs));
@@ -91,11 +91,12 @@ public class DaoUsuario {
             u.setApellidos(rs.getString("apellidos"));
             u.setCorreo(rs.getString("correo"));
             u.setFechaNacimiento(rs.getString("fechaNacimiento"));
-            u.setDireccion(rs.getString("dirreccion"));
-            u.setTelefonoTrabajo(rs.getString("telefonoTrbajo"));
+            u.setDireccion(rs.getString("direccion"));
+            u.setTelefonoTrabajo(rs.getString("telefonoTrabajo"));
             u.setCelular(rs.getString("celular"));
             return u;
         } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
             return null;
         }
     }

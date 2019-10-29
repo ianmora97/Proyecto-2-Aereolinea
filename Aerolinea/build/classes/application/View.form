@@ -99,6 +99,10 @@
                           <EmptySpace min="-2" pref="335" max="-2" attributes="0"/>
                           <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="320" max="-2" attributes="0"/>
+                          <Component id="consultarBTN" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace pref="283" max="32767" attributes="0"/>
               </Group>
@@ -126,7 +130,9 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="134" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="consultarBTN" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="84" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -193,6 +199,14 @@
           </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+        </Component>
+        <Component class="javax.swing.JButton" name="consultarBTN">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Consultar Usuarios"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consultarBTNActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

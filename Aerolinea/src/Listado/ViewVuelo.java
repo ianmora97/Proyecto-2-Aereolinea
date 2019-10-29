@@ -180,7 +180,7 @@ public class ViewVuelo extends javax.swing.JInternalFrame implements Observer  {
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 
- public ModelVuelo model;
+    public ModelVuelo model;
     public ControllerVuelo controller;
 
     public void setModelo(ModelVuelo modelo) {

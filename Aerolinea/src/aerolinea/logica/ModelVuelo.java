@@ -40,8 +40,7 @@ public class ModelVuelo {
     public List<Ciudad> ciudadBuscar(String nombre){
     return vuelos.CiudadSearch(nombre);
 } 
-    
- //pais no estoy segura
+
     
     static ModelVuelo instancia;
 
