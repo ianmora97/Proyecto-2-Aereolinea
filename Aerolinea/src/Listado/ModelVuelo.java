@@ -11,27 +11,25 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+public class ModelVuelo extends Observable {
 
-public class ModelVuelo extends Observable{
-   List<Vuelo> vuelos;
+    List<Vuelo> vuelos;
     Vuelo filtro;
 
     public ModelVuelo(List<Vuelo> vuelos) {
         this.vuelos = vuelos;
-        filtro=new Vuelo("","");
+        filtro = new Vuelo();
     }
 
     public ModelVuelo() {
         vuelos = new ArrayList<>();
-        filtro=new Vuelo("","");
+        filtro = new Vuelo();
     }
-
-  
 
     public void setPersonas(List<Vuelo> vuelos) {
         this.vuelos = vuelos;
         this.setChanged();
-        this.notifyObservers();         
+        this.notifyObservers();
     }
 
     public List<Vuelo> getVuelos() {
@@ -49,12 +47,12 @@ public class ModelVuelo extends Observable{
     public void setFiltro(Vuelo filtro) {
         this.filtro = filtro;
     }
-    
+
     @Override
-    public void addObserver(Observer o){
+    public void addObserver(Observer o) {
         super.addObserver(o);
         this.setChanged();
-        this.notifyObservers();   
+        this.notifyObservers();
     }
-    
+
 }

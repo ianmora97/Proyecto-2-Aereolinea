@@ -19,7 +19,7 @@ public class Viaje {
     public Viaje(String numViaje, String fechaEsp) {
         this.numViaje = numViaje;
         this.fechaEsp = fechaEsp;
-        this.vuelo= new Vuelo("","");
+        this.vuelo= new Vuelo();
     }
 
     public String getNumViaje() {

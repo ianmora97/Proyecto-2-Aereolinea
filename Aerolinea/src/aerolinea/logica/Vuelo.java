@@ -7,17 +7,14 @@ package aerolinea.logica;
 
 /**
  *
- * @author Gaby
+ * @author Ian Rodriguez
  */
 public class Vuelo {
+
     String idVuelo;
     String dia;
-   Ciudad origen;
+    Ciudad origen;
     Ciudad destino;
- 
-
-    public Vuelo() {
-    }
 
     public Vuelo(String idVuelo, String dia, Ciudad origen, Ciudad destino) {
         this.idVuelo = idVuelo;
@@ -26,11 +23,11 @@ public class Vuelo {
         this.destino = destino;
     }
 
-    public Vuelo(String idVuelo, String dia) {
-        this.idVuelo = idVuelo;
-        this.dia = dia;
-        this.origen=new Ciudad("","");
-        this.destino=new Ciudad("","");
+    public Vuelo() {
+        this.idVuelo = "";
+        this.dia = "";
+        this.origen = new Ciudad();
+        this.destino = new Ciudad();
     }
 
     public Ciudad getOrigen() {
@@ -49,8 +46,6 @@ public class Vuelo {
         this.destino = destino;
     }
 
- 
-
     public String getIdVuelo() {
         return idVuelo;
     }
@@ -67,8 +62,4 @@ public class Vuelo {
         this.dia = dia;
     }
 
- 
-    
-  
-    
 }

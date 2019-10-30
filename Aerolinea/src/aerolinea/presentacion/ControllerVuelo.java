@@ -44,7 +44,7 @@ public class ControllerVuelo {
     public void agregar(Vuelo v) {
         try {
             aerolinea.logica.ModelVuelo.instanciar().agregar(v);
-            model.setVuelo(new Vuelo("",""));
+            model.setVuelo(new Vuelo());
     
         } catch (Exception ex) {
 

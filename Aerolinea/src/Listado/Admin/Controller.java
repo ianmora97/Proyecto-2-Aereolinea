@@ -10,5 +10,55 @@ package Listado.Admin;
  * @author Ian Rodriguez
  */
 public class Controller {
+    Model model;
+    View view;
+
+    public Controller(Model model, View view) {
+        this.model = model;
+        this.view = view;
+        view.setModelo(model);
+        view.setControlador(this);
+        leerDatos();
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public void setView(View view) {
+        this.view = view;
+    }
     
+    public void buscarAvion(String id){
+        model.getFiltro().setIdTipoAvion(id);
+        this.refrescar();
+    }
+    
+    public void refrescar() {
+        model.setAviones(aerolinea.logica.ModelAviones.instanciar().buscar(model.getFiltro().getIdTipoAvion()));   
+        
+    }
+    public void leerDatos(){
+        model.setAviones(aerolinea.logica.ModelAviones.instanciar().buscarTodos());
+    }
+    
+    public void editar(int row) throws Exception{
+        aerolinea.logica.ModelAviones.instanciar().editar(model.getFiltro().getIdTipoAvion());
+   
+    }
+    public void show(){
+        view.setVisible(true);
+    }
+
+    public void hide(){
+        view.setVisible(false);
+    } 
 }

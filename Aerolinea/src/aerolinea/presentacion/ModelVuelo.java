@@ -32,7 +32,7 @@ public class ModelVuelo extends Observable{
     }
 
     public ModelVuelo() {
-        v = new Vuelo("","");
+        v = new Vuelo();
          ciudades=new ArrayList<>();
     }
 
