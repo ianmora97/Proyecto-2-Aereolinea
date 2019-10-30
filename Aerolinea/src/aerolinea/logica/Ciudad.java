@@ -5,33 +5,26 @@
  */
 package aerolinea.logica;
 
-import java.util.logging.Logger;
-
 /**
  *
- * @author Gaby
+ * @author Ian Rodriguez
  */
 public class Ciudad {
-      String codigoCiudad;
+    String codigoCiudad;
     String nombre;
-    Pais pais;
+    String pais;
 
-    public Ciudad(String codigoCiudad, String nombre, Pais pais) {
+    public Ciudad(String codigoCiudad, String nombre, String pais) {
         this.codigoCiudad = codigoCiudad;
         this.nombre = nombre;
         this.pais = pais;
     }
 
-    public Ciudad(String codigoCiudad, String nombre) {
-        this.codigoCiudad = codigoCiudad;
-        this.nombre = nombre;
-        this.pais = new Pais("","");
-    }
-
     public Ciudad() {
+       this.codigoCiudad = "";
+        this.nombre = "";
+        this.pais = "";
     }
-
-    
 
     public String getCodigoCiudad() {
         return codigoCiudad;
@@ -49,17 +42,17 @@ public class Ciudad {
         this.nombre = nombre;
     }
 
-    public Pais getPais() {
+    public String getPais() {
         return pais;
     }
 
-    public void setPais(Pais pais) {
+    public void setPais(String pais) {
         this.pais = pais;
     }
 
     @Override
     public String toString() {
-        return  codigoCiudad + " , " + nombre + " ," + pais.getNombre()+ '}';
+        return codigoCiudad + " , " + nombre + " ," + pais ;
     }
     
 }

@@ -5,9 +5,11 @@
  */
 package aerolinea.logica;
 
+import java.util.Objects;
+
 /**
  *
- * @author Gaby
+ * @author Ian Rodriguez
  */
 public class Pais {
     String codigoPais;
@@ -19,6 +21,8 @@ public class Pais {
     }
 
     public Pais() {
+        this.codigoPais = "";
+        this.nombre = "";
     }
 
     
@@ -42,6 +46,14 @@ public class Pais {
     public String toString() {
         return nombre;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.codigoPais);
+        return hash;
+    }
+
     
     
     
