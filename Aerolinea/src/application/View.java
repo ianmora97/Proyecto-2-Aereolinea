@@ -1,8 +1,12 @@
 
 package application;
 
+import aerolinea.logica.Usuario;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 
@@ -22,19 +26,14 @@ public class View extends javax.swing.JFrame implements Observer {
         jSeparator1 = new javax.swing.JSeparator();
         panel = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        usuarioTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        loginButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
         consultarBTN = new javax.swing.JButton();
-        menu_principal = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        edicion = new javax.swing.JMenu();
-        persona_edicion = new javax.swing.JMenuItem();
-        listado = new javax.swing.JMenuItem();
+        passField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
@@ -45,9 +44,9 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Usuario");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        usuarioTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                usuarioTextFieldActionPerformed(evt);
             }
         });
 
@@ -59,7 +58,12 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Login");
 
-        jButton1.setText("Log in");
+        loginButton.setText("Log in");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Registrarse");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -100,22 +104,21 @@ public class View extends javax.swing.JFrame implements Observer {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
+                            .addComponent(usuarioTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addGap(23, 23, 23)
-                                .addComponent(jButton1)
+                                .addComponent(loginButton)
                                 .addGap(32, 32, 32)
                                 .addComponent(jButton2))
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)))
+                            .addComponent(passField)))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(351, 351, 351)
                         .addComponent(jLabel3))
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(335, 335, 335)
-                        .addComponent(jButton3))
-                    .addGroup(panelLayout.createSequentialGroup()
                         .addGap(320, 320, 320)
-                        .addComponent(consultarBTN)))
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton3)
+                            .addComponent(consultarBTN))))
                 .addContainerGap(283, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
@@ -126,75 +129,42 @@ public class View extends javax.swing.JFrame implements Observer {
                 .addGap(46, 46, 46)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(usuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(loginButton)
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
                 .addComponent(consultarBTN)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         panel.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(usuarioTextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(loginButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(jPasswordField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(consultarBTN, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(passField, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         getContentPane().add(panel);
-
-        jMenu1.setText("LogIn");
-        menu_principal.add(jMenu1);
-
-        edicion.setText("Opciones");
-
-        persona_edicion.setText("Administracion");
-        persona_edicion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                persona_edicionActionPerformed(evt);
-            }
-        });
-        edicion.add(persona_edicion);
-
-        listado.setText("Buscar Vuelos");
-        listado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listadoActionPerformed(evt);
-            }
-        });
-        edicion.add(listado);
-
-        menu_principal.add(edicion);
-
-        setJMenuBar(menu_principal);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void persona_edicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_persona_edicionActionPerformed
-        controladora.personasEdicionShow();
-    }//GEN-LAST:event_persona_edicionActionPerformed
-
-    private void listadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listadoActionPerformed
-       controladora.personasListadoShow();
-    }//GEN-LAST:event_listadoActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void usuarioTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_usuarioTextFieldActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        controladora.registrarShow();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -212,25 +182,42 @@ public class View extends javax.swing.JFrame implements Observer {
         controladora.usuariosListadoShow();
     }//GEN-LAST:event_consultarBTNActionPerformed
 
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+
+            Usuario u;
+            String UserPass = "";
+            String pass = passField.getText();
+        try {
+            u = controladora.consultar(usuarioTextField.getText());
+            UserPass = u.getContrasenna();
+        } catch (Exception ex) {
+           System.out.print(ex.getMessage());
+        }
+        
+        if(!(UserPass.equals(pass))){
+             JOptionPane.showMessageDialog(this,"Entrada incorrecta");
+        }
+        else{
+            controladora.usuariosListadoShow();
+        }
+       
+        
+    }//GEN-LAST:event_loginButtonActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton consultarBTN;
-    private javax.swing.JMenu edicion;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JMenuItem listado;
-    private javax.swing.JMenuBar menu_principal;
+    private javax.swing.JButton loginButton;
     public javax.swing.JDesktopPane panel;
-    private javax.swing.JMenuItem persona_edicion;
+    private javax.swing.JPasswordField passField;
+    private javax.swing.JTextField usuarioTextField;
     // End of variables declaration//GEN-END:variables
     private Model model;
     private Controller controladora;

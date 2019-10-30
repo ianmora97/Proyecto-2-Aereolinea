@@ -3,7 +3,6 @@ package aerolinea.datos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import aerolinea.logica.Usuario;
@@ -24,7 +23,7 @@ public class DaoUsuario {
             return Usuario(rs);
         }
         else{
-            throw new Exception ("Usuario no Existe");
+            return null;
         }
     }
     

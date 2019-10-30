@@ -30,16 +30,18 @@ public class Application {
         Listado.usuarios.Controller controllerUsuario = new Listado.usuarios.Controller(modeloUsuario,vistaUsuario);
         Listado_Usuarios_Controller = controllerUsuario;
         
+        Listado.registro.View vistaRegistro = new  Listado.registro.View();
+        Listado.registro.Model modeloRegistro = new Listado.registro.Model();
+        Listado.registro.Controller controllerRegistro = new Listado.registro.Controller(modeloRegistro,vistaRegistro);
+        Registro_Controller = controllerRegistro;
+        
         application.Model modelo3 = new application.Model();
         application.View vista3 = new application.View();
         application.Controller controladora3 = new application.Controller(modelo3, vista3);
-       
-        
-        vista3.panel.add(view);
-        vista3.panel.add(vista2);
         
     }
     public static Listado.ControllerVuelo Listado_Controlador;
     public static ControllerVuelo Edicion_Controlador;
     public static Listado.usuarios.Controller Listado_Usuarios_Controller;
+    public static Listado.registro.Controller Registro_Controller;
 }
