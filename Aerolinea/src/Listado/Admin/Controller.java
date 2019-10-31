@@ -5,6 +5,8 @@
  */
 package Listado.Admin;
 
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+
 /**
  *
  * @author Ian Rodriguez
@@ -19,6 +21,7 @@ public class Controller {
         view.setModelo(model);
         view.setControlador(this);
         leerDatos();
+        view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     public Model getModel() {

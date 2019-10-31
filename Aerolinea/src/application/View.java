@@ -2,6 +2,8 @@
 package application;
 
 import aerolinea.logica.Usuario;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
@@ -14,8 +16,9 @@ public class View extends javax.swing.JFrame implements Observer {
 
     
     public View() {
-        initComponents();
-        
+        initComponents();	
+
+        setLocationRelativeTo(null);	
     }
 
     
@@ -32,7 +35,6 @@ public class View extends javax.swing.JFrame implements Observer {
         loginButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        consultarBTN = new javax.swing.JButton();
         passField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -84,13 +86,6 @@ public class View extends javax.swing.JFrame implements Observer {
             }
         });
 
-        consultarBTN.setText("Consultar Usuarios");
-        consultarBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultarBTNActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -115,10 +110,8 @@ public class View extends javax.swing.JFrame implements Observer {
                         .addGap(351, 351, 351)
                         .addComponent(jLabel3))
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(320, 320, 320)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton3)
-                            .addComponent(consultarBTN))))
+                        .addGap(346, 346, 346)
+                        .addComponent(jButton3)))
                 .addContainerGap(283, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
@@ -140,9 +133,7 @@ public class View extends javax.swing.JFrame implements Observer {
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addGap(18, 18, 18)
-                .addComponent(consultarBTN)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
         panel.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(usuarioTextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -151,7 +142,6 @@ public class View extends javax.swing.JFrame implements Observer {
         panel.setLayer(loginButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(consultarBTN, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(passField, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         getContentPane().add(panel);
@@ -173,14 +163,8 @@ public class View extends javax.swing.JFrame implements Observer {
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
 
-        controladora.personasListadoShow();
         
     }//GEN-LAST:event_jButton3MouseClicked
-
-    private void consultarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarBTNActionPerformed
-        // TODO add your handling code here:
-        controladora.usuariosListadoShow();
-    }//GEN-LAST:event_consultarBTNActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
 
@@ -207,7 +191,6 @@ public class View extends javax.swing.JFrame implements Observer {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton consultarBTN;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

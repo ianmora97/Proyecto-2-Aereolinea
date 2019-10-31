@@ -105,40 +105,6 @@
                               <Component id="jSeparator3" min="-2" pref="820" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <EmptySpace min="55" pref="55" max="-2" attributes="0"/>
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="106" pref="106" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel2" min="-2" pref="36" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" min="-2" pref="36" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="idAvionesLabel" min="-2" pref="161" max="-2" attributes="0"/>
-                                  <Component id="añoAvionesLabel" min="-2" pref="161" max="-2" attributes="0"/>
-                                  <Component id="modeloAvionesLabel" min="-2" pref="161" max="-2" attributes="0"/>
-                                  <Component id="marcaAvionesLabel" min="-2" pref="161" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="59" pref="59" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel8" min="-2" pref="87" max="-2" attributes="0"/>
-                                  <Component id="jLabel7" min="-2" pref="87" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cantidadPasajerosAvionesLabel" min="-2" pref="161" max="-2" attributes="0"/>
-                                  <Component id="filasComboA" min="-2" pref="161" max="-2" attributes="0"/>
-                                  <Component id="pasillosComboA" min="-2" pref="161" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="74" pref="74" max="-2" attributes="0"/>
-                              <Component id="agregarAvionBoton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="884" max="-2" attributes="0"/>
                           </Group>
@@ -194,6 +160,44 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="buscarBoton" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="106" pref="106" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel2" min="-2" pref="36" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" min="-2" pref="36" max="-2" attributes="0"/>
+                                          <Component id="jLabel4" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="idAvionesLabel" min="-2" pref="161" max="-2" attributes="0"/>
+                                          <Component id="añoAvionesLabel" min="-2" pref="161" max="-2" attributes="0"/>
+                                          <Component id="modeloAvionesLabel" min="-2" pref="161" max="-2" attributes="0"/>
+                                          <Component id="marcaAvionesLabel" min="-2" pref="161" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="55" pref="55" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel8" min="-2" pref="87" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" min="-2" pref="87" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cantidadPasajerosAvionesLabel" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Component id="filasComboA" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Component id="pasillosComboA" min="-2" pref="161" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="74" pref="74" max="-2" attributes="0"/>
+                              <Component id="agregarAvionBoton" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   </Group>
@@ -208,7 +212,7 @@
                       <Component id="jSeparator3" min="-2" pref="14" max="-2" attributes="0"/>
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="4" pref="4" max="-2" attributes="0"/>

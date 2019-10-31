@@ -1,10 +1,7 @@
 
-package application;
+package application.main;
 import aerolinea.Application;
-import aerolinea.datos.DaoUsuario;
 import aerolinea.logica.Usuario;
-import java.util.List;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
@@ -21,18 +18,17 @@ public class Controller {
         this.view = v;
         view.setModel(model);
         view.setControladora(this);
-        view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    }
-    public void show(){
         view.setVisible(true);
     }
-    public void usuariosListadoShow(){
-        Application.Listado_Usuarios_Controller.show();
+    
+    public void loginShow(){
+        Application.Login_Controller.show();
+    }
+    public void adminShow(){
+        Application.Admin_Controller.show();
     }
     public Usuario consultar(String id) throws Exception{
         return aerolinea.logica.ModelUsuarios.instanciar().consultar(id);
     }
-    public void registrarShow(){
-        Application.Registro_Controller.show();
-    }
+   
 }
