@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author Gaby
  */
 public class Usuario {
-    String idUsuario, contrasenna, nombre, apellidos,correo,fechaNacimiento,direccion,telefonoTrabajo,celular;
+    String idUsuario, contrasenna, nombre, apellidos,correo,fechaNacimiento,direccion,telefonoTrabajo,celular,sexo;
 
     public Usuario(String idUsuario, String contrasenna, String nombre, String apellidos, String correo, String fechaNacimiento, String direccion, String telefonoTrabajo, String celular) {
         this.idUsuario = idUsuario;
@@ -24,6 +24,7 @@ public class Usuario {
         this.direccion = direccion;
         this.telefonoTrabajo = telefonoTrabajo;
         this.celular = celular;
+        this.sexo = "";
     }
 
     public Usuario() {
@@ -36,6 +37,7 @@ public class Usuario {
         this.direccion = "";
         this.telefonoTrabajo = "";
         this.celular = "";
+        this.sexo = "";
     }
 
     public String getIdUsuario() {
@@ -73,7 +75,9 @@ public class Usuario {
     public String getCelular() {
         return celular;
     }
-
+    public String getSexo(){
+        return sexo;
+    }
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
@@ -109,7 +113,9 @@ public class Usuario {
     public void setCelular(String celular) {
         this.celular = celular;
     }
-
+    public void setSexo(String s){
+        this.sexo =s;
+    }
     @Override
     public int hashCode() {
         int hash = 7;

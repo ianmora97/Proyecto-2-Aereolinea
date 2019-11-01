@@ -19,27 +19,27 @@ public class ModelVuelo {
        vuelos = new DaoVuelo();
     }
 
-    public void agregar(Vuelo v) throws Exception {
-        vuelos.VueloAdd(v);
-    }
-
-    public Vuelo consultar(String id) throws Exception {
-        Vuelo result = vuelos.VueloGet(id);
-        return result;
-    }
-
-    public void modificar(Vuelo v) throws Exception {
-        vuelos.VueloUpdate(v);
-    }
-
-    public List<Vuelo> buscar(String nombre) {
-        List<Vuelo> result = vuelos.VueloSearch(nombre);
-        return result;
-    }
-
-    public List<Ciudad> ciudadBuscar(String nombre){
-    return vuelos.CiudadSearch(nombre);
-} 
+//    public void agregar(Vuelo v) throws Exception {
+//        vuelos.VueloAdd(v);
+//    }
+//
+//    public Vuelo consultar(String id) throws Exception {
+//        Vuelo result = vuelos.VueloGet(id);
+//        return result;
+//    }
+//
+//    public void modificar(Vuelo v) throws Exception {
+//        vuelos.VueloUpdate(v);
+//    }
+//
+//    public List<Vuelo> buscar(String nombre) {
+//        List<Vuelo> result = vuelos.VueloSearch(nombre);
+//        return result;
+//    }
+//
+//    public List<Ciudad> ciudadBuscar(String nombre){
+//    return vuelos.CiudadSearch(nombre);
+//} 
 
     
     static ModelVuelo instancia;

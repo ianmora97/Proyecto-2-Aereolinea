@@ -6,6 +6,7 @@
 package Listado.Admin;
 
 import aerolinea.logica.Avion;
+import aerolinea.logica.Ruta;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -17,18 +18,44 @@ import java.util.Observer;
  */
 public class Model extends Observable{
     List<Avion> avion;
-    Avion filtro;
+    Avion filtroAvion;
+    
+    List<Ruta> rutas;
+    Ruta filtroRuta;
     
     public Model(List<Avion> avion) {
         this.avion = avion;
-        filtro = new Avion();
+        filtroAvion = new Avion();
     }
 
     public Model() {
         avion = new ArrayList<>();
-        filtro=new Avion();
+        filtroAvion=new Avion();
+        
+        rutas = new ArrayList<>();
+        filtroRuta = new Ruta();
     }
 
+    public List<Ruta> getRutas() {
+        return rutas;
+    }
+
+    public void setRutas(List<Ruta> rutas) {
+        this.rutas = rutas;
+        this.setChanged();
+        this.notifyObservers(); 
+    }
+
+    public Ruta getFiltroRuta() {
+        return filtroRuta;
+    }
+
+    public void setFiltroRuta(Ruta filtroRuta) {
+        this.filtroRuta = filtroRuta;
+        this.setChanged();
+        this.notifyObservers(); 
+    }
+    
     public List<Avion> getAviones() {
         return avion;
     }
@@ -40,12 +67,12 @@ public class Model extends Observable{
         
     }
    
-    public Avion getFiltro() {
-        return filtro;
+    public Avion getFiltroAvion() {
+        return filtroAvion;
     }
 
-    public void setFiltro(Avion filtro) {
-        this.filtro = filtro;
+    public void setFiltroAvion(Avion filtro) {
+        this.filtroAvion = filtro;
         this.setChanged();
         this.notifyObservers(); 
     }

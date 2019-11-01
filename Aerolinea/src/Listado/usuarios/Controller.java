@@ -18,6 +18,7 @@ public class Controller{
         this.view = view;
         view.setModelo(model);
         view.setControlador(this);
+        leerDatos();
     }
 
     public Model getModel() {
@@ -45,7 +46,9 @@ public class Controller{
     public void refrescar() {
         model.setUsuarios(aerolinea.logica.ModelUsuarios.instanciar().buscar(model.getFiltro().getIdUsuario()));       
     }
-    
+    public void leerDatos(){
+        model.setUsuarios(aerolinea.logica.ModelUsuarios.instanciar().buscarTodos());
+    }
     public void show(){
         view.setVisible(true);
     }

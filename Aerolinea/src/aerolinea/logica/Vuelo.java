@@ -10,42 +10,23 @@ package aerolinea.logica;
  * @author Ian Rodriguez
  */
 public class Vuelo {
-
     String idVuelo;
-    String dia;
-    Ciudad origen;
-    Ciudad destino;
+    Avion avion;
+    Ruta ruta;
+    Horario horario;
 
-    public Vuelo(String idVuelo, String dia, Ciudad origen, Ciudad destino) {
+    public Vuelo(String idVuelo, Avion avion, Ruta ruta, Horario horario) {
         this.idVuelo = idVuelo;
-        this.dia = dia;
-        this.origen = origen;
-        this.destino = destino;
+        this.avion = avion;
+        this.ruta = ruta;
+        this.horario = horario;
     }
-
-    public Vuelo() {
+    public Vuelo(){
         this.idVuelo = "";
-        this.dia = "";
-        this.origen = new Ciudad();
-        this.destino = new Ciudad();
+        this.avion = null;
+        this.ruta = null;
+        this.horario = null;
     }
-
-    public Ciudad getOrigen() {
-        return origen;
-    }
-
-    public void setOrigen(Ciudad origen) {
-        this.origen = origen;
-    }
-
-    public Ciudad getDestino() {
-        return destino;
-    }
-
-    public void setDestino(Ciudad destino) {
-        this.destino = destino;
-    }
-
     public String getIdVuelo() {
         return idVuelo;
     }
@@ -54,12 +35,35 @@ public class Vuelo {
         this.idVuelo = idVuelo;
     }
 
-    public String getDia() {
-        return dia;
+    public Avion getAvion() {
+        return avion;
     }
 
-    public void setDia(String dia) {
-        this.dia = dia;
+    public void setAvion(Avion avion) {
+        this.avion = avion;
     }
+
+    public Ruta getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(Ruta ruta) {
+        this.ruta = ruta;
+    }
+
+    public Horario getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Horario horario) {
+        this.horario = horario;
+    }
+
+    @Override
+    public String toString() {
+        return "Vuelo{" + "idVuelo=" + idVuelo + ", avion=" + avion + ", ruta=" + ruta + ", horario=" + horario + '}';
+    }
+    
+    
 
 }

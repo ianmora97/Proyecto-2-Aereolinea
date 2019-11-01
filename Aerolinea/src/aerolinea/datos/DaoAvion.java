@@ -35,9 +35,9 @@ public class DaoAvion {
         }
     }
 
-    public void AvionDelete(Avion u) throws Exception {
+    public void AvionDelete(String u) throws Exception {
         String sql = "delete from avion where idTipoAvion='%s'";
-        sql = String.format(sql, u.getIdTipoAvion());
+        sql = String.format(sql, u);
         int count = db.executeUpdate(sql);
         if (count == 0) {
             throw new Exception("Avion no existe");

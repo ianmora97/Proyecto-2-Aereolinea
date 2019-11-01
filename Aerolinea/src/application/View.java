@@ -1,8 +1,8 @@
-
 package application;
 
 import aerolinea.logica.Usuario;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.Observable;
 import java.util.Observer;
@@ -10,18 +10,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
-
 public class View extends javax.swing.JFrame implements Observer {
 
-    
     public View() {
-        initComponents();	
-
-        setLocationRelativeTo(null);	
+        initComponents();
+        setTitle("Log In");
+        setLocationRelativeTo(null);
+        this.setIconImage(getIconImage());
     }
 
-    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("aerolinea/media/icons8-undefined-64.png"));
+
+        return retValue;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -32,15 +37,15 @@ public class View extends javax.swing.JFrame implements Observer {
         usuarioTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        loginButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         passField = new javax.swing.JPasswordField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
-        panel.setBackground(new java.awt.Color(0, 102, 255));
+        panel.setBackground(new java.awt.Color(31, 75, 119));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -56,33 +61,28 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Contraseña");
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Login");
 
-        loginButton.setText("Log in");
-        loginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginButtonActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Registrarse");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Buscar Vuelos");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(106, 189, 106));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-comprobado-50.png"))); // NOI18N
+        jLabel4.setText(" Entrar");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
+                jLabel4MouseClicked(evt);
             }
         });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(85, 176, 229));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/registrarse.png"))); // NOI18N
+        jLabel5.setText("Registrarse");
+        jLabel5.setToolTipText("");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
             }
         });
 
@@ -93,56 +93,62 @@ public class View extends javax.swing.JFrame implements Observer {
             .addGroup(panelLayout.createSequentialGroup()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(usuarioTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(loginButton)
-                                .addGap(32, 32, 32)
-                                .addComponent(jButton2))
-                            .addComponent(passField)))
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(351, 351, 351)
+                        .addGap(233, 233, 233)
                         .addComponent(jLabel3))
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(346, 346, 346)
-                        .addComponent(jButton3)))
-                .addContainerGap(283, Short.MAX_VALUE))
+                        .addGap(94, 94, 94)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(usuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(83, 83, 83))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(199, 199, 199))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(177, 177, 177))))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel3)
-                .addGap(46, 46, 46)
+                .addGap(12, 12, 12)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(usuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel2))
                     .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loginButton)
-                    .addComponent(jButton2))
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addContainerGap())
         );
         panel.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(usuarioTextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(loginButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(passField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(jSeparator2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         getContentPane().add(panel);
 
@@ -151,67 +157,54 @@ public class View extends javax.swing.JFrame implements Observer {
 
     private void usuarioTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioTextFieldActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_usuarioTextFieldActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        controladora.registrarShow();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-
-        
-    }//GEN-LAST:event_jButton3MouseClicked
-
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-
-            Usuario u;
-            String UserPass = "";
-            String pass = passField.getText();
+        Usuario u;
+        String UserPass = "";
+        String pass = passField.getText();
         try {
             u = controladora.consultar(usuarioTextField.getText());
             UserPass = u.getContrasenna();
         } catch (Exception ex) {
-           System.out.print(ex.getMessage());
+            System.out.print(ex.getMessage());
         }
-        
-        if(!(UserPass.equals(pass))){
-             JOptionPane.showMessageDialog(this,"Entrada incorrecta");
-        }
-        else{
-            controladora.usuariosListadoShow();
-        }
-       
-        
-    }//GEN-LAST:event_loginButtonActionPerformed
 
+        if (!(UserPass.equals(pass))) {
+            JOptionPane.showMessageDialog(this, "Entrada incorrecta");
+        } else {
+            JOptionPane.showMessageDialog(this, "Entrada Correcta");
+        }
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+        controladora.registrarShow();
+    }//GEN-LAST:event_jLabel5MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton loginButton;
+    private javax.swing.JSeparator jSeparator2;
     public javax.swing.JDesktopPane panel;
     private javax.swing.JPasswordField passField;
     private javax.swing.JTextField usuarioTextField;
     // End of variables declaration//GEN-END:variables
     private Model model;
     private Controller controladora;
-    
-    
+
     @Override
-    public void update(Observable o, Object arg) 
-    {
-       
+    public void update(Observable o, Object arg) {
+
     }
-   
+
     public Model getModel() {
         return model;
     }
@@ -228,5 +221,5 @@ public class View extends javax.swing.JFrame implements Observer {
     public void setControladora(Controller controladora) {
         this.controladora = controladora;
     }
-    
+
 }

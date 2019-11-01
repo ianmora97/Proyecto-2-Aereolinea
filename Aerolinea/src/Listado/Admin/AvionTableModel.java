@@ -42,9 +42,9 @@ public class AvionTableModel extends AbstractTableModel{
     public String getColumnName(int columnIndex){
         switch(columnIndex){
             case 0: return "Id";
-            case 2: return "Cant Pasajeros";
-            case 1: return "Filas";
-            case 3: return "Asientos";
+            case 1: return "Cant Pasajeros";
+            case 2: return "Cant Filas";
+            case 3: return "Asientos x Fila";
             case 4: return "Modelo";
             case 5: return "Marca";
             case 6: return "Anio";

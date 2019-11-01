@@ -22,6 +22,7 @@ public class Controller {
         view.setModel(model);
         view.setControladora(this);
         view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+       
     }
     public void show(){
         view.setVisible(true);

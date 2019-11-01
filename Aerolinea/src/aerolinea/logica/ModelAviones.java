@@ -22,7 +22,9 @@ public class ModelAviones {
     public void agregar(Avion v) throws Exception {
         usuarios.AvionAdd(v);
     }
-
+    public void eliminar(String a) throws Exception{
+        usuarios.AvionDelete(a);
+    }
     public Avion consultar(String id) throws Exception {
         Avion result = usuarios.getAvion(id);
         return result;

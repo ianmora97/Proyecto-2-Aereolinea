@@ -5,6 +5,8 @@
  */
 package Listado.registro;
 
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+
 /**
  *
  * @author Ian Rodriguez
@@ -18,6 +20,7 @@ public class Controller {
         this.view = view;
         view.setModelo(model);
         view.setControlador(this);
+        view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     public Model getModel() {
         return model;

@@ -5,6 +5,9 @@
  */
 package Listado.Admin;
 
+import aerolinea.Application;
+import aerolinea.logica.Avion;
+import aerolinea.logica.Ruta;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
@@ -12,6 +15,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  * @author Ian Rodriguez
  */
 public class Controller {
+
     Model model;
     View view;
 
@@ -22,6 +26,7 @@ public class Controller {
         view.setControlador(this);
         leerDatos();
         view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        view.setTitle("Administracion");
     }
 
     public Model getModel() {
@@ -40,28 +45,60 @@ public class Controller {
         this.view = view;
     }
     
-    public void buscarAvion(String id){
-        model.getFiltro().setIdTipoAvion(id);
-        this.refrescar();
+    public void usuariosListadoShow() {
+        Application.Listado_Usuarios_Controller.show();
     }
-    
-    public void refrescar() {
-        model.setAviones(aerolinea.logica.ModelAviones.instanciar().buscar(model.getFiltro().getIdTipoAvion()));   
-        
-    }
-    public void leerDatos(){
-        model.setAviones(aerolinea.logica.ModelAviones.instanciar().buscarTodos());
-    }
-    
-    public void editar(int row) throws Exception{
-        aerolinea.logica.ModelAviones.instanciar().editar(model.getFiltro().getIdTipoAvion());
-   
-    }
-    public void show(){
+
+    public void show() {
         view.setVisible(true);
     }
 
-    public void hide(){
+    public void hide() {
         view.setVisible(false);
-    } 
+    }
+    /*------------------METODOS AVIONES------------------------*/
+
+    public void buscarAvion(String id) {
+        model.getFiltroAvion().setIdTipoAvion(id);
+        model.setAviones(aerolinea.logica.ModelAviones.instanciar().buscar(model.getFiltroAvion().getIdTipoAvion()));
+    }
+    public void updateAvion(Avion a) throws Exception {
+        aerolinea.logica.ModelAviones.instanciar().modificar(a);
+    }
+    public void insertarAvion() throws Exception {
+        aerolinea.logica.ModelAviones.instanciar().agregar(model.filtroAvion);
+    }
+    public void leerDatos() {
+        model.setAviones(aerolinea.logica.ModelAviones.instanciar().buscarTodos());
+        model.setRutas(aerolinea.logica.ModelRutas.instanciar().buscarTodos());
+    }
+    public void editarAviones(int row) throws Exception {
+        aerolinea.logica.ModelAviones.instanciar().editar(model.getFiltroAvion().getIdTipoAvion());
+    }
+    public void deleteAviones(String text) throws Exception {
+        aerolinea.logica.ModelAviones.instanciar().eliminar(text);
+    }
+    /*--------------------------------METODOS RUTAS-------------------------------------*/
+    public void insertarRuta() throws Exception {
+        aerolinea.logica.ModelRutas.instanciar().agregar(model.filtroRuta);
+    }
+    public void editarRuta(int row) throws Exception{
+        aerolinea.logica.ModelRutas.instanciar().editar(model.getFiltroRuta().getCodigoRuta());
+    }
+    public void deleteRuta(String text) throws Exception{
+        aerolinea.logica.ModelRutas.instanciar().eliminar(text);
+    }
+    public void buscarRuta(String s){
+        model.getFiltroRuta().setCodigoRuta(s);
+        model.setRutas(aerolinea.logica.ModelRutas.instanciar().buscar(model.getFiltroRuta().getCodigoRuta()));
+    }
+    public void updateRuta(Ruta ruta) throws Exception {
+        aerolinea.logica.ModelRutas.instanciar().modificar(ruta);
+    }
+    /*---------------------------------METODOS HORARIOS-----------------------------------------*/
+    
+    
+    
+    
+
 }

@@ -79,6 +79,19 @@ public class DaoUsuario {
         return resultado;
 
     }
+    public List<Usuario> UsuarioSearchEO(){
+        List<Usuario> resultado = new ArrayList<Usuario>();
+        try {
+            String sql = "select * "+
+                         "from usuario ";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(Usuario(rs));
+            }
+        } catch (SQLException ex) { }
+        return resultado;
+
+    }
     
        
     private Usuario Usuario(ResultSet rs){

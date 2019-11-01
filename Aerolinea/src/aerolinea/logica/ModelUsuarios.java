@@ -36,6 +36,10 @@ public class ModelUsuarios {
         List<Usuario> result = usuarios.UsuarioSearch(nombre);
         return result;
     }
+    public List<Usuario> buscarTodos() {
+        List<Usuario> result = usuarios.UsuarioSearchEO();
+        return result;
+    }
     
     static ModelUsuarios instancia;
 
