@@ -6,15 +6,21 @@
 package Listado.Admin;
 
 import aerolinea.logica.Avion;
+import aerolinea.logica.Horario;
 import aerolinea.logica.Ruta;
+import com.sun.jmx.snmp.BerDecoder;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.Date;
 
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -29,11 +35,18 @@ public class View extends javax.swing.JFrame implements Observer {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
+        
+//        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+//        modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+        
         tablaRutas.getTableHeader().setBackground(Color.DARK_GRAY);
         tablaRutas.getTableHeader().setForeground(Color.white);
 
         tablaAviones.getTableHeader().setBackground(Color.DARK_GRAY);
         tablaAviones.getTableHeader().setForeground(Color.white);
+        
+        tablaHorarios.getTableHeader().setBackground(Color.DARK_GRAY);
+        tablaHorarios.getTableHeader().setForeground(Color.white);
 
         TabbedPane.setBackground(new Color(51, 153, 255));
         TabbedPane.getSelectedComponent().setBackground(new Color(31, 75, 119));
@@ -61,6 +74,7 @@ public class View extends javax.swing.JFrame implements Observer {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
+        jComboBox1 = new javax.swing.JComboBox();
         TabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -99,10 +113,10 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel19 = new javax.swing.JLabel();
         ModifcarFilasCombo = new javax.swing.JComboBox();
         jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
+        agregarAviones = new javax.swing.JLabel();
+        buscarBotonAviones = new javax.swing.JLabel();
+        eliminarAviones = new javax.swing.JLabel();
+        editarAviones = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         RutasPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -129,10 +143,10 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel51 = new javax.swing.JLabel();
-        jLabel52 = new javax.swing.JLabel();
-        jLabel53 = new javax.swing.JLabel();
+        agregarRutas = new javax.swing.JLabel();
+        buscarBotonRutas = new javax.swing.JLabel();
+        eliminarRutas = new javax.swing.JLabel();
+        editarRutas = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         HorariosjPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -149,15 +163,11 @@ public class View extends javax.swing.JFrame implements Observer {
         jSeparator8 = new javax.swing.JSeparator();
         jSeparator9 = new javax.swing.JSeparator();
         jLabel37 = new javax.swing.JLabel();
-        agregarHorarioBoton = new javax.swing.JButton();
-        modificarHorarioBoton2 = new javax.swing.JButton();
         jLabel44 = new javax.swing.JLabel();
         jSeparator10 = new javax.swing.JSeparator();
         jLabel45 = new javax.swing.JLabel();
         buscarHorariosJText = new javax.swing.JTextField();
-        buscarHorariosBoton1 = new javax.swing.JButton();
         jLabel46 = new javax.swing.JLabel();
-        EliminarHorarioBoton4 = new javax.swing.JButton();
         diajComboBox = new javax.swing.JComboBox();
         mesjComboBox = new javax.swing.JComboBox();
         aniojTextField = new javax.swing.JTextField();
@@ -165,16 +175,24 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel31 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
-        modificarhoraLlegadaLabel2 = new javax.swing.JTextField();
-        modificarhoraSalidaLabel1 = new javax.swing.JTextField();
-        modificarduracionLabel1 = new javax.swing.JTextField();
+        modificarhoraLlegada = new javax.swing.JTextField();
+        modificarhoraSalida = new javax.swing.JTextField();
+        modificarduracion = new javax.swing.JTextField();
         jLabel49 = new javax.swing.JLabel();
-        modificardiajComboBox1 = new javax.swing.JComboBox();
-        modificarmesjComboBox1 = new javax.swing.JComboBox();
-        modificaraniojTextField1 = new javax.swing.JTextField();
-        modificarpreciojTextField1 = new javax.swing.JTextField();
+        modificarFECHA = new javax.swing.JTextField();
+        modificarPrecio = new javax.swing.JTextField();
         jLabel50 = new javax.swing.JLabel();
+        AgregarHorarios = new javax.swing.JLabel();
+        buscarBotonHorarios = new javax.swing.JLabel();
+        editarHorarios = new javax.swing.JLabel();
+        eliminarHorarios = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        idHorarioLabel = new javax.swing.JTextField();
+        jLabel40 = new javax.swing.JLabel();
+        modificaridHorario = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tablaVuelos = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -188,6 +206,8 @@ public class View extends javax.swing.JFrame implements Observer {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 385, Short.MAX_VALUE)
         );
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
@@ -270,6 +290,7 @@ public class View extends javax.swing.JFrame implements Observer {
         pasillosComboA.setMaximumRowCount(2);
         pasillosComboA.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2 pasillos", "3 pasillos", "" }));
 
+        ModifcaridAvionesLabel1.setEditable(false);
         ModifcaridAvionesLabel1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ModifcaridAvionesLabel1ActionPerformed(evt);
@@ -333,31 +354,31 @@ public class View extends javax.swing.JFrame implements Observer {
         ModifcarFilasCombo.setMaximumRowCount(2);
         ModifcarFilasCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30 filas", "60 filas", "" }));
 
-        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-más-50.png"))); // NOI18N
-        jLabel39.addMouseListener(new java.awt.event.MouseAdapter() {
+        agregarAviones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-más-50.png"))); // NOI18N
+        agregarAviones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel39MouseClicked(evt);
+                agregarAvionesMouseClicked(evt);
             }
         });
 
-        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-búsqueda-50.png"))); // NOI18N
-        jLabel40.addMouseListener(new java.awt.event.MouseAdapter() {
+        buscarBotonAviones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-búsqueda-50.png"))); // NOI18N
+        buscarBotonAviones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel40MouseClicked(evt);
+                buscarBotonAvionesMouseClicked(evt);
             }
         });
 
-        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-borrar-para-siempre-50.png"))); // NOI18N
-        jLabel41.addMouseListener(new java.awt.event.MouseAdapter() {
+        eliminarAviones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-borrar-para-siempre-50.png"))); // NOI18N
+        eliminarAviones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel41MouseClicked(evt);
+                eliminarAvionesMouseClicked(evt);
             }
         });
 
-        jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-editar-50.png"))); // NOI18N
-        jLabel42.addMouseListener(new java.awt.event.MouseAdapter() {
+        editarAviones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-editar-50.png"))); // NOI18N
+        editarAviones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel42MouseClicked(evt);
+                editarAvionesMouseClicked(evt);
             }
         });
 
@@ -381,7 +402,7 @@ public class View extends javax.swing.JFrame implements Observer {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(577, 577, 577)
-                                .addComponent(jLabel40))
+                                .addComponent(buscarBotonAviones))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(132, 132, 132)
                                 .addComponent(jLabel19))
@@ -423,8 +444,8 @@ public class View extends javax.swing.JFrame implements Observer {
                             .addComponent(ModifcarmarcaAvionesLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(82, 82, 82)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel41)
-                            .addComponent(jLabel42)))
+                            .addComponent(eliminarAviones)
+                            .addComponent(editarAviones)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -455,7 +476,7 @@ public class View extends javax.swing.JFrame implements Observer {
                                 .addGap(27, 27, 27)
                                 .addComponent(jLabel38)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel39)))
+                        .addComponent(agregarAviones)))
                 .addGap(6, 6, 6))
         );
         jPanel1Layout.setVerticalGroup(
@@ -507,12 +528,12 @@ public class View extends javax.swing.JFrame implements Observer {
                         .addComponent(marcaAvionesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(59, 59, 59)
-                        .addComponent(jLabel39)))
+                        .addComponent(agregarAviones)))
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel40))
+                        .addComponent(buscarBotonAviones))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jLabel19))
@@ -549,20 +570,18 @@ public class View extends javax.swing.JFrame implements Observer {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(jLabel15)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ModifcarCantPasillosCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(jLabel42)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ModifcarFilasCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel41))
-                        .addGap(10, 10, 10)
-                        .addComponent(ModifcarCantPasillosCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(ModifcarmarcaAvionesLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(editarAviones)
+                            .addComponent(ModifcarmarcaAvionesLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ModifcarFilasCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(eliminarAviones))))
         );
 
         TabbedPane.addTab("Gestion Aviones", jPanel1);
@@ -668,31 +687,31 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel24.setLabelFor(modeloAvionesLabel);
         jLabel24.setText("Ciudad Destino");
 
-        jLabel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-más-50.png"))); // NOI18N
-        jLabel43.addMouseListener(new java.awt.event.MouseAdapter() {
+        agregarRutas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-más-50.png"))); // NOI18N
+        agregarRutas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel43MouseClicked(evt);
+                agregarRutasMouseClicked(evt);
             }
         });
 
-        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-búsqueda-50.png"))); // NOI18N
-        jLabel51.addMouseListener(new java.awt.event.MouseAdapter() {
+        buscarBotonRutas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-búsqueda-50.png"))); // NOI18N
+        buscarBotonRutas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel51MouseClicked(evt);
+                buscarBotonRutasMouseClicked(evt);
             }
         });
 
-        jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-borrar-para-siempre-50.png"))); // NOI18N
-        jLabel52.addMouseListener(new java.awt.event.MouseAdapter() {
+        eliminarRutas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-borrar-para-siempre-50.png"))); // NOI18N
+        eliminarRutas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel52MouseClicked(evt);
+                eliminarRutasMouseClicked(evt);
             }
         });
 
-        jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-editar-50.png"))); // NOI18N
-        jLabel53.addMouseListener(new java.awt.event.MouseAdapter() {
+        editarRutas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-editar-50.png"))); // NOI18N
+        editarRutas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel53MouseClicked(evt);
+                editarRutasMouseClicked(evt);
             }
         });
 
@@ -739,9 +758,9 @@ public class View extends javax.swing.JFrame implements Observer {
                                 .addGap(55, 55, 55)
                                 .addGroup(RutasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(RutasPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel52)
+                                        .addComponent(eliminarRutas)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel53))
+                                        .addComponent(editarRutas))
                                     .addComponent(modificarOrigenText, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(69, 69, 69)
                                 .addComponent(modificarDestinoText, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -763,7 +782,7 @@ public class View extends javax.swing.JFrame implements Observer {
                                 .addGap(31, 31, 31)
                                 .addComponent(buscarRutasJText, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel51)
+                                .addComponent(buscarBotonRutas)
                                 .addGap(41, 41, 41))))
                     .addGroup(RutasPanelLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
@@ -778,7 +797,7 @@ public class View extends javax.swing.JFrame implements Observer {
                         .addComponent(jLabel25))
                     .addGroup(RutasPanelLayout.createSequentialGroup()
                         .addGap(409, 409, 409)
-                        .addComponent(jLabel43)))
+                        .addComponent(agregarRutas)))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         RutasPanelLayout.setVerticalGroup(
@@ -807,7 +826,7 @@ public class View extends javax.swing.JFrame implements Observer {
                             .addComponent(ciudadOrigenText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ciudadDestinoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel43)))
+                        .addComponent(agregarRutas)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(RutasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -819,7 +838,7 @@ public class View extends javax.swing.JFrame implements Observer {
                         .addComponent(buscarRutasJText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(RutasPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel51)))
+                        .addComponent(buscarBotonRutas)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -844,8 +863,8 @@ public class View extends javax.swing.JFrame implements Observer {
                         .addComponent(modificarDestinoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26)
                 .addGroup(RutasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel52)
-                    .addComponent(jLabel53))
+                    .addComponent(eliminarRutas)
+                    .addComponent(editarRutas))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -912,6 +931,7 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel30.setLabelFor(modeloAvionesLabel);
         jLabel30.setText("Hora Llegada");
 
+        horaLlegadaLabel1.setEditable(false);
         horaLlegadaLabel1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 horaLlegadaLabel1ActionPerformed(evt);
@@ -929,24 +949,6 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel37.setForeground(new java.awt.Color(255, 255, 255));
         jLabel37.setText("Agregar Horarios");
 
-        agregarHorarioBoton.setBackground(new java.awt.Color(51, 153, 255));
-        agregarHorarioBoton.setForeground(new java.awt.Color(255, 255, 255));
-        agregarHorarioBoton.setText("Agregar");
-        agregarHorarioBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregarHorarioBotonActionPerformed(evt);
-            }
-        });
-
-        modificarHorarioBoton2.setBackground(new java.awt.Color(51, 153, 255));
-        modificarHorarioBoton2.setForeground(new java.awt.Color(255, 255, 255));
-        modificarHorarioBoton2.setText("Modificar");
-        modificarHorarioBoton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarHorarioBoton2ActionPerformed(evt);
-            }
-        });
-
         jLabel44.setBackground(new java.awt.Color(51, 153, 255));
         jLabel44.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel44.setForeground(new java.awt.Color(255, 255, 255));
@@ -955,26 +957,8 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel45.setForeground(new java.awt.Color(204, 204, 204));
         jLabel45.setText("Seleccione un horario para modificar");
 
-        buscarHorariosBoton1.setBackground(new java.awt.Color(51, 110, 77));
-        buscarHorariosBoton1.setForeground(new java.awt.Color(255, 255, 255));
-        buscarHorariosBoton1.setText("Buscar");
-        buscarHorariosBoton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarHorariosBoton1ActionPerformed(evt);
-            }
-        });
-
         jLabel46.setForeground(new java.awt.Color(255, 255, 255));
         jLabel46.setText("Buscar");
-
-        EliminarHorarioBoton4.setBackground(new java.awt.Color(255, 51, 51));
-        EliminarHorarioBoton4.setForeground(new java.awt.Color(255, 255, 255));
-        EliminarHorarioBoton4.setText("Eliminar");
-        EliminarHorarioBoton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarHorarioBoton4ActionPerformed(evt);
-            }
-        });
 
         diajComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "26", "27", "28", "29", "30", "31" }));
         diajComboBox.setToolTipText("Dia");
@@ -1001,49 +985,87 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel48.setLabelFor(modeloAvionesLabel);
         jLabel48.setText("Hora Llegada");
 
-        modificarhoraLlegadaLabel2.addActionListener(new java.awt.event.ActionListener() {
+        modificarhoraLlegada.setEditable(false);
+        modificarhoraLlegada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarhoraLlegadaLabel2ActionPerformed(evt);
+                modificarhoraLlegadaActionPerformed(evt);
             }
         });
 
-        modificarhoraSalidaLabel1.addActionListener(new java.awt.event.ActionListener() {
+        modificarhoraSalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarhoraSalidaLabel1ActionPerformed(evt);
+                modificarhoraSalidaActionPerformed(evt);
             }
         });
 
-        modificarduracionLabel1.addActionListener(new java.awt.event.ActionListener() {
+        modificarduracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarduracionLabel1ActionPerformed(evt);
+                modificarduracionActionPerformed(evt);
             }
         });
 
         jLabel49.setForeground(new java.awt.Color(255, 255, 255));
         jLabel49.setText("Fecha");
 
-        modificardiajComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "26", "27", "28", "29", "30", "31" }));
-        modificardiajComboBox1.setToolTipText("Dia");
-
-        modificarmesjComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Agosto", "Octubre", "Noviembre", "Diciembre" }));
-        modificarmesjComboBox1.setToolTipText("Mes");
-        modificarmesjComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarmesjComboBox1ActionPerformed(evt);
-            }
-        });
-
-        modificaraniojTextField1.setToolTipText("Año");
+        modificarFECHA.setToolTipText("Año");
 
         jLabel50.setForeground(new java.awt.Color(255, 255, 255));
         jLabel50.setText("Precio");
+
+        AgregarHorarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-más-50.png"))); // NOI18N
+        AgregarHorarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AgregarHorariosMouseClicked(evt);
+            }
+        });
+
+        buscarBotonHorarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-búsqueda-50.png"))); // NOI18N
+        buscarBotonHorarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscarBotonHorariosMouseClicked(evt);
+            }
+        });
+
+        editarHorarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-editar-50.png"))); // NOI18N
+        editarHorarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarHorariosMouseClicked(evt);
+            }
+        });
+
+        eliminarHorarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-borrar-para-siempre-50.png"))); // NOI18N
+        eliminarHorarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eliminarHorariosMouseClicked(evt);
+            }
+        });
+
+        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel39.setLabelFor(idAvionesLabel);
+        jLabel39.setText("Id Horario");
+
+        idHorarioLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idHorarioLabelActionPerformed(evt);
+            }
+        });
+
+        jLabel40.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel40.setLabelFor(idAvionesLabel);
+        jLabel40.setText("Id Horario");
+
+        modificaridHorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificaridHorarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout HorariosjPanel6Layout = new javax.swing.GroupLayout(HorariosjPanel6);
         HorariosjPanel6.setLayout(HorariosjPanel6Layout);
         HorariosjPanel6Layout.setHorizontalGroup(
             HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(HorariosjPanel6Layout.createSequentialGroup()
                         .addGap(347, 347, 347)
                         .addComponent(jLabel27))
@@ -1055,14 +1077,15 @@ public class View extends javax.swing.JFrame implements Observer {
                         .addComponent(jLabel37))
                     .addGroup(HorariosjPanel6Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(jLabel46)
-                        .addGap(31, 31, 31)
-                        .addComponent(buscarHorariosJText, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(buscarHorariosBoton1))
+                        .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                                .addGap(132, 132, 132)
+                                .addComponent(jLabel46)
+                                .addGap(31, 31, 31)
+                                .addComponent(buscarHorariosJText, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(13, 13, 13)
+                                .addComponent(buscarBotonHorarios))
+                            .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(HorariosjPanel6Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 884, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1076,63 +1099,84 @@ public class View extends javax.swing.JFrame implements Observer {
                         .addComponent(jLabel45))
                     .addGroup(HorariosjPanel6Layout.createSequentialGroup()
                         .addGap(79, 79, 79)
-                        .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel48, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(modificarduracionLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(modificarhoraSalidaLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(modificarhoraLlegadaLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(59, 59, 59)
-                        .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel49, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                                    .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                                            .addComponent(duracionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(59, 59, 59)
+                                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(64, 64, 64))
+                                        .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                                            .addComponent(horaSalidaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18))))
+                                .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(idHorarioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(166, 166, 166)))
+                            .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                                .addGap(315, 315, 315)
+                                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(58, 58, 58)))
+                        .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                                .addComponent(diajComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(mesjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(aniojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(horaLlegadaLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(preciojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(AgregarHorarios)
+                                .addGap(80, 80, 80))))
+                    .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
                         .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                                .addComponent(modificardiajComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(modificarmesjComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(modificarpreciojTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(modificaraniojTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(modificarHorarioBoton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(EliminarHorarioBoton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(duracionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(horaSalidaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(horaLlegadaLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
-                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                        .addComponent(diajComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(mesjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(preciojTextField))
-                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(aniojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HorariosjPanel6Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(agregarHorarioBoton)
-                        .addGap(88, 88, 88))))
+                                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(modificaridHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(59, 59, 59)
+                                .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(editarHorarios))
+                            .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(modificarduracion, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                                        .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(6, 6, 6)
+                                        .addComponent(modificarhoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(59, 59, 59)
+                                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                                        .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(modificarhoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HorariosjPanel6Layout.createSequentialGroup()
+                                        .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(modificarPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(modificarFECHA, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(89, 89, 89)
+                                .addComponent(eliminarHorarios)))))
+                .addContainerGap())
         );
         HorariosjPanel6Layout.setVerticalGroup(
             HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1145,52 +1189,56 @@ public class View extends javax.swing.JFrame implements Observer {
                 .addComponent(jLabel37)
                 .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel28)
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel29)
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel30))
-                    .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(duracionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(horaSalidaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(horaLlegadaLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(HorariosjPanel6Layout.createSequentialGroup()
                         .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
+                                .addGap(27, 27, 27)
                                 .addComponent(jLabel36)
                                 .addGap(18, 18, 18))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HorariosjPanel6Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
+                                .addGap(27, 27, 27)
                                 .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(diajComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(mesjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(diajComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(aniojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(13, 13, 13)))
+                                .addGap(18, 18, 18)))
+                        .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AgregarHorarios)
+                            .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(duracionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel28))
+                                    .addComponent(preciojTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(horaLlegadaLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel30)
+                                    .addComponent(jLabel29)
+                                    .addComponent(horaSalidaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(preciojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(agregarHorarioBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(51, 51, 51)
-                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
+                            .addComponent(jLabel39)
+                            .addComponent(idHorarioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
                 .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
+                        .addGap(21, 21, 21)
                         .addComponent(jLabel46))
                     .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
+                        .addGap(17, 17, 17)
                         .addComponent(buscarHorariosJText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(buscarHorariosBoton1))
-                .addGap(18, 18, 18)
+                    .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(buscarBotonHorarios))
+                    .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel44)
                     .addGroup(HorariosjPanel6Layout.createSequentialGroup()
@@ -1198,43 +1246,43 @@ public class View extends javax.swing.JFrame implements Observer {
                         .addComponent(jLabel45)))
                 .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(EliminarHorarioBoton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(modificarHorarioBoton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel31)
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel47)
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel48))
-                            .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(modificarduracionLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(modificarhoraSalidaLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(modificarhoraLlegadaLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(33, 33, 33)
+                                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel49)
+                                    .addComponent(modificarFECHA, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HorariosjPanel6Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(editarHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(12, 12, 12)
+                        .addComponent(eliminarHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel40)
+                            .addComponent(modificaridHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(HorariosjPanel6Layout.createSequentialGroup()
                                 .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(HorariosjPanel6Layout.createSequentialGroup()
-                                        .addGap(5, 5, 5)
-                                        .addComponent(jLabel49)
-                                        .addGap(18, 18, 18))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HorariosjPanel6Layout.createSequentialGroup()
-                                        .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(modificardiajComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(modificarmesjComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(modificaraniojTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(13, 13, 13)))
+                                    .addComponent(jLabel31)
+                                    .addComponent(modificarduracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(5, 5, 5)
+                                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel47)
+                                    .addComponent(modificarhoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(HorariosjPanel6Layout.createSequentialGroup()
+                                .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(modificarPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, HorariosjPanel6Layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(HorariosjPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(modificarpreciojTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(58, Short.MAX_VALUE))
+                                    .addComponent(modificarhoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel48)))))))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -1254,15 +1302,36 @@ public class View extends javax.swing.JFrame implements Observer {
 
         TabbedPane.addTab("Gestion de Horarios", jPanel4);
 
+        jPanel3.setBackground(new java.awt.Color(31, 75, 119));
+
+        tablaVuelos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(tablaVuelos);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 896, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 703, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(237, 237, 237)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         TabbedPane.addTab("Gestion de Vuelos", jPanel3);
@@ -1286,7 +1355,7 @@ public class View extends javax.swing.JFrame implements Observer {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TabbedPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
+            .addComponent(TabbedPane, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -1405,6 +1474,27 @@ public class View extends javax.swing.JFrame implements Observer {
 
     private void tablaHorariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaHorariosMouseClicked
         // TODO add your handling code here:
+        //editar
+        String llegada, salida, precio;
+        String fecha;
+        String duracion, idHorario;
+        
+        if (evt.getClickCount() == 2) {
+            int row = this.tablaHorarios.getSelectedRow();
+            idHorario = tablaHorarios.getValueAt(row, 0).toString();
+            duracion = tablaHorarios.getValueAt(row, 1).toString();
+            fecha = tablaHorarios.getValueAt(row, 2).toString();
+            llegada = tablaHorarios.getValueAt(row, 3).toString();
+            salida = tablaHorarios.getValueAt(row, 4).toString();
+            precio = tablaHorarios.getValueAt(row, 5).toString();
+            
+            modificaridHorario.setText(idHorario);
+            modificarduracion.setText(duracion);
+            modificarFECHA.setText(fecha);
+            modificarhoraLlegada.setText(llegada);
+            modificarhoraSalida.setText(salida);
+            modificarPrecio.setText(precio);
+        }
     }//GEN-LAST:event_tablaHorariosMouseClicked
 
     private void duracionLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duracionLabelActionPerformed
@@ -1419,43 +1509,23 @@ public class View extends javax.swing.JFrame implements Observer {
         // TODO add your handling code here:
     }//GEN-LAST:event_horaLlegadaLabel1ActionPerformed
 
-    private void agregarHorarioBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarHorarioBotonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_agregarHorarioBotonActionPerformed
-
-    private void modificarHorarioBoton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarHorarioBoton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_modificarHorarioBoton2ActionPerformed
-
-    private void buscarHorariosBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarHorariosBoton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarHorariosBoton1ActionPerformed
-
-    private void EliminarHorarioBoton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarHorarioBoton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EliminarHorarioBoton4ActionPerformed
-
     private void mesjComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesjComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mesjComboBoxActionPerformed
 
-    private void modificarhoraLlegadaLabel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarhoraLlegadaLabel2ActionPerformed
+    private void modificarhoraLlegadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarhoraLlegadaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_modificarhoraLlegadaLabel2ActionPerformed
+    }//GEN-LAST:event_modificarhoraLlegadaActionPerformed
 
-    private void modificarhoraSalidaLabel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarhoraSalidaLabel1ActionPerformed
+    private void modificarhoraSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarhoraSalidaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_modificarhoraSalidaLabel1ActionPerformed
+    }//GEN-LAST:event_modificarhoraSalidaActionPerformed
 
-    private void modificarduracionLabel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarduracionLabel1ActionPerformed
+    private void modificarduracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarduracionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_modificarduracionLabel1ActionPerformed
+    }//GEN-LAST:event_modificarduracionActionPerformed
 
-    private void modificarmesjComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarmesjComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_modificarmesjComboBox1ActionPerformed
-
-    private void jLabel39MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel39MouseClicked
+    private void agregarAvionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarAvionesMouseClicked
         // TODO add your handling code here:
         try {
             id = idAvionesLabel.getText();
@@ -1471,13 +1541,13 @@ public class View extends javax.swing.JFrame implements Observer {
 
         } catch (Exception e) {
         }
-    }//GEN-LAST:event_jLabel39MouseClicked
+    }//GEN-LAST:event_agregarAvionesMouseClicked
 
-    private void jLabel40MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel40MouseClicked
+    private void buscarBotonAvionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarBotonAvionesMouseClicked
         controller.buscarAvion(this.buscarJText.getText());
-    }//GEN-LAST:event_jLabel40MouseClicked
+    }//GEN-LAST:event_buscarBotonAvionesMouseClicked
 
-    private void jLabel41MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MouseClicked
+    private void eliminarAvionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarAvionesMouseClicked
         try {
             // TODO add your handling code here:
             controller.deleteAviones(ModifcaridAvionesLabel1.getText());
@@ -1485,9 +1555,9 @@ public class View extends javax.swing.JFrame implements Observer {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Avion no se pudo Eliminar");
         }
-    }//GEN-LAST:event_jLabel41MouseClicked
+    }//GEN-LAST:event_eliminarAvionesMouseClicked
 
-    private void jLabel42MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel42MouseClicked
+    private void editarAvionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarAvionesMouseClicked
         //modificar
         id = ModifcaridAvionesLabel1.getText();
         modelo = ModifcarmodeloAvionesLabel1.getText();
@@ -1508,9 +1578,9 @@ public class View extends javax.swing.JFrame implements Observer {
         ModifcarañoAvionesLabel1.setText("");
         ModifcarmarcaAvionesLabel1.setText("");
         ModifcarmodeloAvionesLabel1.setText("");
-    }//GEN-LAST:event_jLabel42MouseClicked
+    }//GEN-LAST:event_editarAvionesMouseClicked
 
-    private void jLabel43MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel43MouseClicked
+    private void agregarRutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarRutasMouseClicked
         //agregarRutas
         codigoRutaAg = codigoRutaText.getText();
         destinoAg = ciudadDestinoText.getText();
@@ -1523,14 +1593,14 @@ public class View extends javax.swing.JFrame implements Observer {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Ruta No Ingresada");
         }
-    }//GEN-LAST:event_jLabel43MouseClicked
+    }//GEN-LAST:event_agregarRutasMouseClicked
 
-    private void jLabel51MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel51MouseClicked
+    private void buscarBotonRutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarBotonRutasMouseClicked
         // TODO add your handling code here:
         controller.buscarRuta(this.buscarRutasJText.getText());
-    }//GEN-LAST:event_jLabel51MouseClicked
+    }//GEN-LAST:event_buscarBotonRutasMouseClicked
 
-    private void jLabel52MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel52MouseClicked
+    private void eliminarRutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarRutasMouseClicked
         // TODO add your handling code here:
         try {
             controller.deleteRuta(modificarCodigoText.getText());
@@ -1538,10 +1608,9 @@ public class View extends javax.swing.JFrame implements Observer {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Ruta no se pudo Eliminar");
         }
-    }//GEN-LAST:event_jLabel52MouseClicked
+    }//GEN-LAST:event_eliminarRutasMouseClicked
 
-    private void jLabel53MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel53MouseClicked
-        // TODO add your handling code here:
+    private void editarRutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarRutasMouseClicked
         // TODO add your handling code here:
         codigoRutaMod = modificarCodigoText.getText();
         destinoMod = modificarDestinoText.getText();
@@ -1557,7 +1626,101 @@ public class View extends javax.swing.JFrame implements Observer {
         modificarCodigoText.setText("");
         modificarDestinoText.setText("");
         modificarOrigenText.setText("");
-    }//GEN-LAST:event_jLabel53MouseClicked
+    }//GEN-LAST:event_editarRutasMouseClicked
+    
+    private void AgregarHorariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarHorariosMouseClicked
+        // TODO add your handling code here:
+        //boton agregarHorarios
+        
+        String llegada, salida, precio;
+        String fecha;
+        String duracion, idHorario;
+        int mes;
+        
+        idHorario = idHorarioLabel.getText();
+        duracion = duracionLabel.getText();
+        salida = horaSalidaLabel.getText();
+        precio = preciojTextField.getText();
+        
+        int suma = Integer.parseInt(salida) + Integer.parseInt(duracion);
+        
+        llegada = "" + suma;
+        horaLlegadaLabel1.setText(llegada);
+        
+        mes = 11 - mesjComboBox.getSelectedIndex() + 1;
+        
+        fecha = diajComboBox.getSelectedItem().toString() +"/"+mes+"/"+aniojTextField.getText();
+        
+        Horario result = new Horario(idHorario,duracion, fecha,llegada,salida,precio);
+        model.setFiltroHorario(result);
+        try {
+            controller.insertarHorario();
+            JOptionPane.showMessageDialog(this, "Horario Ingresado");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Horario No Ingresadp");
+        }
+        
+    }//GEN-LAST:event_AgregarHorariosMouseClicked
+
+    private void buscarBotonHorariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarBotonHorariosMouseClicked
+        // TODO add your handling code here:
+        //buscarBotonHorarios
+        controller.buscarHorario(buscarHorariosJText.getText());
+    }//GEN-LAST:event_buscarBotonHorariosMouseClicked
+
+    private void idHorarioLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idHorarioLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idHorarioLabelActionPerformed
+
+    private void modificaridHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificaridHorarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modificaridHorarioActionPerformed
+
+    private void editarHorariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarHorariosMouseClicked
+        // TODO add your handling code here:
+        //editar boton
+        String llegada, salida, precio,fecha,duracion, idHorario;
+        
+        idHorario = modificaridHorario.getText();
+        duracion = modificarduracion.getText();
+        fecha = modificarFECHA.getText();
+        llegada = modificarhoraLlegada.getText();
+        salida = modificarhoraSalida.getText();
+        precio=modificarPrecio.getText();
+        
+        Horario result = new Horario(idHorario, duracion ,fecha, llegada, salida,precio);
+        try {
+            controller.updateHorario(result);
+            JOptionPane.showMessageDialog(this, "Horario Modificado");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Horario no se pudo modificar");
+        }
+        modificaridHorario.setText("");
+        modificarduracion.setText("");
+        modificarFECHA.setText("");
+        modificarhoraLlegada.setText("");
+        modificarhoraSalida.setText("");
+        modificarPrecio.setText("");
+        controller.leerDatos();
+    }//GEN-LAST:event_editarHorariosMouseClicked
+
+    private void eliminarHorariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarHorariosMouseClicked
+        // TODO add your handling code here:
+        //eliminar horarios
+        try {
+            controller.deleteHorario(modificaridHorario.getText());
+            JOptionPane.showMessageDialog(this, "Horario Eliminado Correctamente");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Horario no se pudo Eliminar");
+        }
+        modificaridHorario.setText("");
+        modificarduracion.setText("");
+        modificarFECHA.setText("");
+        modificarhoraLlegada.setText("");
+        modificarhoraSalida.setText("");
+        modificarPrecio.setText("");
+        controller.leerDatos();
+    }//GEN-LAST:event_eliminarHorariosMouseClicked
     public void makeAvion() {
         Avion result = new Avion(id, modelo, marca, anio, numPasajero,
                 filas, asientos);
@@ -1632,7 +1795,7 @@ public class View extends javax.swing.JFrame implements Observer {
         return asientosA;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton EliminarHorarioBoton4;
+    private javax.swing.JLabel AgregarHorarios;
     private javax.swing.JPanel HorariosjPanel6;
     private javax.swing.JComboBox ModifcarCantPasillosCombo;
     private javax.swing.JComboBox ModifcarFilasCombo;
@@ -1642,10 +1805,13 @@ public class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JTextField ModifcarmodeloAvionesLabel1;
     private javax.swing.JPanel RutasPanel;
     private javax.swing.JTabbedPane TabbedPane;
-    private javax.swing.JButton agregarHorarioBoton;
+    private javax.swing.JLabel agregarAviones;
+    private javax.swing.JLabel agregarRutas;
     private javax.swing.JTextField aniojTextField;
     private javax.swing.JTextField añoAvionesLabel;
-    private javax.swing.JButton buscarHorariosBoton1;
+    private javax.swing.JLabel buscarBotonAviones;
+    private javax.swing.JLabel buscarBotonHorarios;
+    private javax.swing.JLabel buscarBotonRutas;
     private javax.swing.JTextField buscarHorariosJText;
     private javax.swing.JTextField buscarJText;
     private javax.swing.JTextField buscarRutasJText;
@@ -1657,10 +1823,18 @@ public class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JTextField codigoRutaText;
     private javax.swing.JComboBox diajComboBox;
     private javax.swing.JTextField duracionLabel;
+    private javax.swing.JLabel editarAviones;
+    private javax.swing.JLabel editarHorarios;
+    private javax.swing.JLabel editarRutas;
+    private javax.swing.JLabel eliminarAviones;
+    private javax.swing.JLabel eliminarHorarios;
+    private javax.swing.JLabel eliminarRutas;
     private javax.swing.JComboBox filasComboA;
     private javax.swing.JTextField horaLlegadaLabel1;
     private javax.swing.JTextField horaSalidaLabel;
     private javax.swing.JTextField idAvionesLabel;
+    private javax.swing.JTextField idHorarioLabel;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1696,9 +1870,6 @@ public class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
@@ -1707,9 +1878,6 @@ public class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1724,6 +1892,7 @@ public class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -1738,20 +1907,19 @@ public class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JTextField modeloAvionesLabel;
     private javax.swing.JTextField modificarCodigoText;
     private javax.swing.JTextField modificarDestinoText;
-    private javax.swing.JButton modificarHorarioBoton2;
+    private javax.swing.JTextField modificarFECHA;
     private javax.swing.JTextField modificarOrigenText;
-    private javax.swing.JTextField modificaraniojTextField1;
-    private javax.swing.JComboBox modificardiajComboBox1;
-    private javax.swing.JTextField modificarduracionLabel1;
-    private javax.swing.JTextField modificarhoraLlegadaLabel2;
-    private javax.swing.JTextField modificarhoraSalidaLabel1;
-    private javax.swing.JComboBox modificarmesjComboBox1;
-    private javax.swing.JTextField modificarpreciojTextField1;
+    private javax.swing.JTextField modificarPrecio;
+    private javax.swing.JTextField modificarduracion;
+    private javax.swing.JTextField modificarhoraLlegada;
+    private javax.swing.JTextField modificarhoraSalida;
+    private javax.swing.JTextField modificaridHorario;
     private javax.swing.JComboBox pasillosComboA;
     private javax.swing.JTextField preciojTextField;
     private javax.swing.JTable tablaAviones;
     private javax.swing.JTable tablaHorarios;
     private javax.swing.JTable tablaRutas;
+    private javax.swing.JTable tablaVuelos;
     // End of variables declaration//GEN-END:variables
 
     public Model model;
@@ -1782,5 +1950,11 @@ public class View extends javax.swing.JFrame implements Observer {
 
         this.tablaRutas.setModel(new RutaTableModel(model.getRutas()));
         this.tablaRutas.setRowHeight(20);
+        
+        this.tablaHorarios.setModel(new HorarioTableModel(model.getHorarios()));
+        this.tablaHorarios.setRowHeight(20);
+        
+        this.tablaVuelos.setModel(new VuelosTableModel(model.getVuelos()));
+        this.tablaVuelos.setRowHeight(20);
     }
 }

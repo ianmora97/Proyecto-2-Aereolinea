@@ -6,6 +6,7 @@
 package aerolinea.logica;
 
 import java.sql.Date;
+import java.util.Objects;
 
 /**
  *
@@ -13,20 +14,23 @@ import java.sql.Date;
  */
 public class Horario {
     
-    int duracion; //primary key
-    Date fecha;
+    String idHorario; //primary key
+    String duracion; 
+    String fecha;
     String horaLlegada, horaSalida;
     String precio;
    
     public Horario() {
-        this.duracion = 0;
-        this.fecha = null;
+        idHorario = "";
+        this.duracion = "";
+        this.fecha = "";
         this.horaLlegada = "";
         this.horaSalida = "";
         this.precio = "";
     }
 
-    public Horario(int duracion, Date fecha, String horaLlegada, String horaSalida, String precio) {
+    public Horario(String horario, String duracion, String fecha, String horaLlegada, String horaSalida, String precio) {
+        this.idHorario = horario;
         this.duracion = duracion;
         this.fecha = fecha;
         this.horaLlegada = horaLlegada;
@@ -34,19 +38,27 @@ public class Horario {
         this.precio = precio;
     }
 
-    public int getDuracion() {
+    public String getIdHorario() {
+        return idHorario;
+    }
+
+    public void setIdHorario(String idHorario) {
+        this.idHorario = idHorario;
+    }
+
+    public String getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(int duracion) {
+    public void setDuracion(String duracion) {
         this.duracion = duracion;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -81,10 +93,12 @@ public class Horario {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + this.duracion;
+        int hash = 7;
+        hash = 13 * hash + Objects.hashCode(this.duracion);
         return hash;
     }
+
+   
 
     @Override
     public boolean equals(Object obj) {

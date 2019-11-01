@@ -18,28 +18,32 @@ public class ModelVuelo {
     public ModelVuelo() {
        vuelos = new DaoVuelo();
     }
+    public void agregar(Vuelo v) throws Exception {
+//        vuelos.AvionAdd(v);
+    }
+    public void eliminar(String a) throws Exception{
+//        vuelos.AvionDelete(a);
+    }
+    public Vuelo consultar(String id) throws Exception {
+//        Vuelo result = vuelos.getAvion(id);
+        return null;
+    }
+    public Vuelo editar(String id) throws Exception {
+//        Vuelo result = vuelos.getAvion(id);
+        return null;
+    }
+    public void modificar(Vuelo v) throws Exception {
+//        vuelos.AvionUpdate(v);
+    }
 
-//    public void agregar(Vuelo v) throws Exception {
-//        vuelos.VueloAdd(v);
-//    }
-//
-//    public Vuelo consultar(String id) throws Exception {
-//        Vuelo result = vuelos.VueloGet(id);
-//        return result;
-//    }
-//
-//    public void modificar(Vuelo v) throws Exception {
-//        vuelos.VueloUpdate(v);
-//    }
-//
-//    public List<Vuelo> buscar(String nombre) {
-//        List<Vuelo> result = vuelos.VueloSearch(nombre);
-//        return result;
-//    }
-//
-//    public List<Ciudad> ciudadBuscar(String nombre){
-//    return vuelos.CiudadSearch(nombre);
-//} 
+    public List<Vuelo> buscar(String nombre) {
+//        List<Vuelo> result = vuelos.AvionSearch(nombre);
+        return null;
+    }
+    public List<Vuelo> buscarTodos() {
+        List<Vuelo> result = vuelos.VueloSearchEO();
+        return result;
+    }
 
     
     static ModelVuelo instancia;

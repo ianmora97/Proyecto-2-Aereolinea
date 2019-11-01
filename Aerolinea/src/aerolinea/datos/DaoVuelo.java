@@ -1,5 +1,9 @@
 package aerolinea.datos;
 
+import aerolinea.logica.Vuelo;
+import aerolinea.logica.Avion;
+import aerolinea.logica.Horario;
+import aerolinea.logica.Ruta;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,151 +20,101 @@ public class DaoVuelo {
         db = new RelDatabase();
     }
 
-//    public Vuelo VueloGet(String id) throws Exception {
-//
-//        String sql = "select * "
-//                + "from vuelo p inner join Ciudad e on p.Estado_codigo=e.codigo "
-//                + "where p.idVuelo='%s'";
-//        sql = String.format(sql, id);
-//        ResultSet rs = db.executeQuery(sql);
-//        if (rs.next()) {
-//            return Vuelo(rs);
-//        } else {
-//            throw new Exception("Vuelo no Existe");
-//        }
-//    }
-//
-//    public void VueloDelete(Vuelo v) throws Exception {
-//        String sql = "delete from vuelo where idVuelo='%s'";
-//        sql = String.format(sql, v.getIdVuelo());
-//        int count = db.executeUpdate(sql);
-//        if (count == 0) {
-//            throw new Exception("Vuelo no existe");
-//        }
-//    }
-//
-//    public void VueloAdd(Vuelo v) throws Exception {
-//
-//        String sql = "insert into Persona (idVuelo, dia, Ciudad_origen, Ciudad_destino) "
-//                + "values('%s','%s','%s','%s')";
-//        sql = String.format(sql, v.getIdVuelo(), v.getDia(), v.getOrigen().getCodigoCiudad(), v.getDestino().getCodigoCiudad());
-//        int count = db.executeUpdate(sql);
-//        if (count == 0) {
-//            throw new Exception("Vuelo ya existe");
-//        }
-//    }
-//
-//    public void VueloUpdate(Vuelo v) throws Exception {
-//        String sql = "update vuelo set dia='%s' "
-//                + "where idVuelo='%s'";
-//        sql = String.format(sql, v.getDia(), v.getOrigen(), v.getDestino());
-//
-//        int count = db.executeUpdate(sql);
-//        if (count == 0) {
-//            throw new Exception("Vuelo no existe");
-//        }
-//    }
-//
-//    public List<Vuelo> VueloSearch(String dia) {//preguntar
-//        List<Vuelo> resultado = new ArrayList<Vuelo>();
-//        try {
-//            String sql = "select * "
-//                    + "from vuelo v inner join Ciudad e on v.Ciudad_codigo=e.codigo "
-//                    + "where v.dia like '%%%s%%'";
-//            sql = String.format(sql, dia);
-//            ResultSet rs = db.executeQuery(sql);
-//            while (rs.next()) {
-//                resultado.add(Vuelo(rs));
-//            }
-//        } catch (SQLException ex) {
-//        }
-//        return resultado;
-//
-//    }
-//
-//    public List<Ciudad> CiudadSearch(String nombre) {
-//        List<Ciudad> resultado = new ArrayList<Ciudad>();
-//        try {
-//            String sql = "select * "
-//                    + "from  Ciudad";
-//
-//            sql = String.format(sql, nombre);
-//            ResultSet rs = db.executeQuery(sql);
-//            while (rs.next()) {
-//
-//                resultado.add(Ciudad(rs));
-//            }
-//        } catch (SQLException ex) {
-//            System.out.println("NO SE PUDO CARGAR ESTADO");
-//        }
-//        return resultado;
-//    }
-//
-//    public Ciudad CiudadGet(String codigo) throws Exception {
-//        String sql = "select* "
-//                + "from  Ciudad e  ";
-//
-//        sql = String.format(sql, codigo);
-//        ResultSet rs = db.executeQuery(sql);
-//        if (rs.next()) {
-//            return Ciudad(rs);
-//        } else {
-//            throw new Exception("Ciudad  no Existe");
-//        }
-//    }
-//
-//    private Pais Pais(ResultSet rs) {
-//        try {
-//            Pais p = new Pais();
-//            p.setCodigoPais(rs.getString("codigoPais"));
-//            p.setNombre(rs.getString("nombre"));
-//            return p;
-//        } catch (SQLException ex) {
-//            return null;
-//        }
-//    }
-//
-//    private Ciudad Ciudad(ResultSet rs) {
-//        try {
-//            Ciudad c = new Ciudad();
-//            c.setCodigoCiudad(rs.getString("codigoCiudad"));
-//            c.setNombre(rs.getString("nombre"));
-//            c.setPais(rs.getString("Pais_codigo"));
-//            return c;
-//        } catch (SQLException ex) {
-//            return null;
-//        }
-//    }
-//
-//    private Vuelo Vuelo(ResultSet rs) {
-//        try {
-//            Vuelo v = new Vuelo();
-//            v.setIdVuelo(rs.getString("id"));
-//            v.setDia(rs.getString("dia"));
-//            v.setOrigen(Ciudad(rs));
-//            v.setDestino(Ciudad(rs));
-//            return v;
-//        } catch (SQLException ex) {
-//            return null;
-//        }
-//    }
-//
-//    public List<Ciudad> llenarCombo() {
-//        List<Ciudad> resultado = new ArrayList<Ciudad>();
-//        try {
-//            String sql = "select * "
-//                    + "from  Ciudad";
-//            ResultSet rs = db.executeQuery(sql);
-//            while (rs.next()) {
-//
-//                resultado.add(Ciudad(rs));
-//            }
-//        } catch (SQLException ex) {
-//            System.out.println("NO SE PUDO CARGAR CIUDAD");
-//        }
-//        return resultado;
-//    }
-//
-//    public void close() {
-//    }
+    public Vuelo getVuelos(String id) throws Exception {
+
+        String sql = "select "
+                + "ruta, ciudadDestino, ciudadOrigen, fecha, "
+                + "horaSalida,horaLlegada,duracion, precio, numPasajeros, "
+                + "marca, modelo, anno   "
+                + "from vuelo v "
+                + "inner join avion a on v.avion = a.idTipoAvion "
+                + "inner join ruta r on v.ruta = r.codigoRuta "
+                + "inner join horario h on v.horario = h.idhorario"
+                + "where v.idvuelo = '%s' ";
+        sql = String.format(sql, id);
+        ResultSet rs = db.executeQuery(sql);
+        if (rs.next()) {
+            return Vuelo(rs);
+        } else {
+            throw new Exception("Vuelo no Existe");
+        }
+    }
+    public List<Vuelo> VueloSearchEO() {
+        List<Vuelo> resultado = new ArrayList<Vuelo>();
+        try {
+            String sql = "select "
+                + "ruta, ciudadDestino, ciudadOrigen, fecha, "
+                + "horaSalida,horaLlegada,duracion, precio, numPasajeros, "
+                + "marca, modelo, anno   "
+                + "from vuelo v "
+                + "inner join avion a on v.avion = a.idTipoAvion "
+                + "inner join ruta r on v.ruta = r.codigoRuta "
+                + "inner join horario h on v.horario = h.idhorario";
+            ResultSet rs = db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(Vuelo(rs));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+
+    }
+    private Vuelo Vuelo(ResultSet rs) {
+        try {
+            Vuelo u = new Vuelo();
+            u.setIdVuelo(rs.getString("idvuelo"));
+            u.setAvion(Avion(rs));
+            u.setHorario(Horario(rs));
+            u.setRuta(Ruta(rs));
+            return u;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
+    private Avion Avion(ResultSet rs) {
+        try {
+            Avion u = new Avion();
+            u.setIdTipoAvion(rs.getString("idTipoAvion"));
+            u.setNumPasajeros(rs.getInt("numPasajeros"));
+            u.setFilas(rs.getInt("filas"));
+            u.setAsientos(rs.getInt("asientos"));
+            u.setModelo(rs.getString("modelo"));
+            u.setMarca(rs.getString("marca"));
+            u.setAnno(rs.getString("anno"));
+
+            return u;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
+    private Horario Horario(ResultSet rs) {
+        try {
+            Horario u = new Horario();
+            u.setIdHorario(rs.getString("idHorario"));
+            u.setDuracion(rs.getString("duracion"));
+            u.setFecha(rs.getString("fecha"));
+            u.setHoraLlegada(rs.getString("horaLlegada"));
+            u.setHoraSalida(rs.getString("horaSalida"));
+            u.setPrecio(rs.getString("precio"));
+
+            return u;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
+    private Ruta Ruta(ResultSet rs) {
+        try {
+            Ruta u = new Ruta();
+            u.setCodigoRuta(rs.getString("codigoRuta"));
+            u.setCiudadDestino(rs.getString("ciudadDestino"));
+            u.setCiudadOrigen(rs.getString("ciudadOrigen"));
+            return u;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
 }
