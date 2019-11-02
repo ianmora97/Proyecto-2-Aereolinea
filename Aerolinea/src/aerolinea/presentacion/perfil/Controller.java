@@ -25,7 +25,9 @@ public class Controller {
         view.setTitle("Perfil");
         model.setReservas(aerolinea.logica.ModelReservacion.instanciar().buscarTodos());
     }
-
+    public void compraTiquetesShow(){
+        
+    }
     public Model getModel() {
         return model;
     }

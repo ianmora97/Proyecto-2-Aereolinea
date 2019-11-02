@@ -13,6 +13,7 @@ public class Application {
     public static application.main.Controller MainApp_Controller;
     public static Listado.Admin.Controller Admin_Controller;
     public static aerolinea.presentacion.perfil.Controller Perfil_Controller;
+    public static aerolinea.presentacion.compraTiquetes.Controller Compra_Controller;
 
     public static void main(String[] args) {
 
@@ -40,6 +41,11 @@ public class Application {
         aerolinea.presentacion.perfil.View view5 = new aerolinea.presentacion.perfil.View();
         aerolinea.presentacion.perfil.Controller controller5 = new aerolinea.presentacion.perfil.Controller(modelo5, view5);
         Perfil_Controller = controller5;
+        
+        aerolinea.presentacion.compraTiquetes.Model modelo6 = new aerolinea.presentacion.compraTiquetes.Model();
+        aerolinea.presentacion.compraTiquetes.View view6 = new aerolinea.presentacion.compraTiquetes.View();
+        aerolinea.presentacion.compraTiquetes.Controller controller6 = new aerolinea.presentacion.compraTiquetes.Controller(modelo6, view6);
+        Compra_Controller = controller6;
         
         application.main.Model modelo4 = new application.main.Model();
         application.main.View vista4 = new application.main.View();
