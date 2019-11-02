@@ -2,6 +2,7 @@
 package application.main;
 import aerolinea.Application;
 import aerolinea.logica.Usuario;
+import aerolinea.logica.Vuelo;
 
 /**
  *
@@ -19,6 +20,9 @@ public class Controller {
         view.setModel(model);
         view.setControladora(this);
         view.setVisible(true);
+        model.setVuelosBuscar(aerolinea.logica.ModelVuelo.instanciar().buscarTodos());
+        model.setVuelosDescuento(aerolinea.logica.ModelVuelo.instanciar().buscarDescuentoList());
+        
     }
     
     public void loginShow(){
@@ -30,5 +34,14 @@ public class Controller {
     public Usuario consultar(String id) throws Exception{
         return aerolinea.logica.ModelUsuarios.instanciar().consultar(id);
     }
-   
+    public Vuelo buscarVuelos(String a, String b, String c) throws Exception{
+        Vuelo result = aerolinea.logica.ModelVuelo.instanciar().buscarPor(a, b, c);
+        return result;
+    }
+    public void buscarVuelo(String a, String b, String c) throws Exception{
+        model.setVuelosBuscar(aerolinea.logica.ModelVuelo.instanciar().buscarEs(a, b, c));
+    }
+    public void buscarTodos() throws Exception{
+        model.setVuelosBuscar(aerolinea.logica.ModelVuelo.instanciar().buscarTodos());
+    }
 }

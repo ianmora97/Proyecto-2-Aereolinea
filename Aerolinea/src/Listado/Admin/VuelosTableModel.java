@@ -5,7 +5,7 @@
  */
 package Listado.Admin;
 
-import aerolinea.logica.Horario;
+
 import aerolinea.logica.Vuelo;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;

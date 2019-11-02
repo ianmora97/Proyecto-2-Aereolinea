@@ -24,6 +24,14 @@ public class ModelVuelo {
     public void agregar(Vuelo v) throws Exception {
         vuelos.VuelosAdd(v);
     }
+    public Vuelo buscarPor(String a, String b, String c) throws Exception{
+        Vuelo r = vuelos.buscarPorVuelo(a, b, c);
+        return r;
+    }
+    public List<Vuelo> buscarEs(String a, String b, String c) throws Exception{
+        List<Vuelo> r = vuelos.VueloSearch(a, b, c);
+        return r;
+    }
     public void eliminar(String a) throws Exception{
 //        vuelos.AvionDelete(a);
     }
@@ -47,7 +55,10 @@ public class ModelVuelo {
         List<Vuelo> result = vuelos.VueloSearchEO();
         return result;
     }
-
+    public List<Vuelo> buscarDescuentoList() {
+        List<Vuelo> result = vuelos.VueloSearchDescuento();
+        return result;
+    }
     
     static ModelVuelo instancia;
 

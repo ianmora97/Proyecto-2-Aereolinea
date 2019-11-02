@@ -16,7 +16,14 @@ public class Controller {
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
+        view.setModelo(model);
+        view.setControlador(this);
+        model.setVuelos(aerolinea.logica.ModelVuelo.instanciar().buscarTodos());
     }
-    
-    
+    public void leerDatos(){
+        model.setVuelos(aerolinea.logica.ModelVuelo.instanciar().buscarTodos());
+    }
+    public void show(){
+        this.view.setVisible(true);
+    }
 }

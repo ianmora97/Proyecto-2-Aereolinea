@@ -34,7 +34,7 @@ public class ReservacionesTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 3;
     }
     
     @Override    
@@ -42,8 +42,7 @@ public class ReservacionesTableModel extends AbstractTableModel {
         switch(columnIndex){
             case 0: return "Id";
             case 1: return "Vuelo";
-            case 2: return "Asiento";
-            case 3: return "Pago_id";
+            case 2: return "Tipo de Pago";
             default: return "";
         }        
     }
@@ -54,8 +53,7 @@ public class ReservacionesTableModel extends AbstractTableModel {
         switch(columnIndex){
             case 0: return v.getIdReserva();
             case 1: return v.getVuelo();
-            case 2: return v.getAsiento().toString();
-            case 3: return v.getPago_id();
+            case 2: return v.getPago_id();
             default: return "";
         }
     }

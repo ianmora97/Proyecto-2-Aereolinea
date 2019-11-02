@@ -813,7 +813,6 @@
                                           <Component id="buscarRutasJText" min="-2" pref="340" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="buscarBotonRutas" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -919,7 +918,7 @@
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="eliminarRutas" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="editarRutas" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -1380,16 +1379,15 @@
                           <Component id="jSeparator9" min="-2" pref="14" max="-2" attributes="0"/>
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                           <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="mesjComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="diajComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1419,7 +1417,6 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="idHorarioLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2069,13 +2066,15 @@
                           <Component id="jLabel53" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="AgregarVuelosBoton" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="EliminarVuelosBoton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="EditarVuelosBoton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="idVuelosAgregare" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel54" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="EliminarVuelosBoton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="EditarVuelosBoton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>

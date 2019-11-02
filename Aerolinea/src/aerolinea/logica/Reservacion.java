@@ -12,19 +12,17 @@ import java.util.Objects;
  * @author Ian Rodriguez
  */
 public class Reservacion {
-    String idReserva,vuelo,asiento,Pago_id;
+    String idReserva,vuelo,Pago_id;
 
-    public Reservacion(String idReserva, String vuelo, String asiento, String Pago_id) {
+    public Reservacion(String idReserva, String vuelo, String Pago_id) {
         this.idReserva = idReserva;
         this.vuelo = vuelo;
-        this.asiento = asiento;
         this.Pago_id = Pago_id;
     }
 
     public Reservacion() {
         this.idReserva = "";
         this.vuelo = "";
-        this.asiento = "";
         this.Pago_id = "";
     }
 
@@ -44,13 +42,6 @@ public class Reservacion {
         this.vuelo = vuelo;
     }
 
-    public String getAsiento() {
-        return asiento;
-    }
-
-    public void setAsiento(String asiento) {
-        this.asiento = asiento;
-    }
 
     public String getPago_id() {
         return Pago_id;
@@ -62,7 +53,7 @@ public class Reservacion {
 
     @Override
     public String toString() {
-        return "Reservacion{" + "idReserva=" + idReserva + ", vuelo=" + vuelo + ", asiento=" + asiento + ", Pago_id=" + Pago_id + '}';
+        return "Reservacion{" + "idReserva=" + idReserva + ", vuelo=" + vuelo +  ", Pago_id=" + Pago_id + '}';
     }
 
     @Override

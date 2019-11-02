@@ -173,7 +173,7 @@ public class View extends javax.swing.JFrame implements Observer {
         if (!(UserPass.equals(pass))) {
             JOptionPane.showMessageDialog(this, "Entrada incorrecta");
         } else {
-            Application.Perfil_Controller.getView().crearSesion(u);
+            Application.Perfil_Controller.getModel().setSesion(u);
             JOptionPane.showMessageDialog(this, "Entrada Correcta");
             controladora.perfilShow();
         }

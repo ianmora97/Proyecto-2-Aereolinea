@@ -5,18 +5,28 @@
  */
 package aerolinea.presentacion.compraTiquetes;
 
+import Listado.Admin.VuelosTableModel;
+import java.awt.Color;
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author Ian Rodriguez
  */
-public class View extends javax.swing.JFrame {
+public class View extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form View
      */
     public View() {
         initComponents();
-        LayerPane.setVisible(false);
+        Paypal.setVisible(false);
+        MasterCard.setVisible(false);
+        Visa.setVisible(false);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -28,9 +38,10 @@ public class View extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToolBar1 = new javax.swing.JToolBar();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaVuelos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -44,21 +55,16 @@ public class View extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        cardHolder = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         botonComprar = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel12 = new javax.swing.JLabel();
-        pagoVisa = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        buenViajeLabel = new javax.swing.JLabel();
         Paypal = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        PagarPayPal = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -74,20 +80,27 @@ public class View extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         botonComprarMasterCard = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        pagoMasterCard = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        buenViajeLabelMasterCard = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        selecRuta = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        selectFehca = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        pagoLabel = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+
+        jToolBar1.setRollover(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Compra de Tiquetes");
         setIconImage(getIconImage());
 
         jPanel1.setBackground(new java.awt.Color(31, 75, 119));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaVuelos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -98,21 +111,31 @@ public class View extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tablaVuelos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaVuelosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaVuelos);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 128, 1089, 180));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Compra de Tiquetes");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Seleccione un Vuelo");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Metodo de pago");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 346, -1, -1));
 
-        comboPagos.setForeground(new java.awt.Color(255, 255, 255));
-        comboPagos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Visa", "MasterCard", "PayPal", " " }));
+        comboPagos.setMaximumRowCount(3);
+        comboPagos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Visa", "PayPal", "MasterCard", " " }));
         comboPagos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 comboPagosMouseClicked(evt);
@@ -123,17 +146,21 @@ public class View extends javax.swing.JFrame {
                 comboPagosActionPerformed(evt);
             }
         });
+        jPanel1.add(comboPagos, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 343, -1, -1));
 
         LayerPane.setMaximumSize(new java.awt.Dimension(1250, 1250));
 
-        Visa.setBackground(new java.awt.Color(0, 102, 153));
+        Visa.setBackground(new java.awt.Color(31, 75, 119));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Card Number:");
 
+        jTextField1.setText("4151 1234 5678 1478");
+
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Vencimiento");
 
+        jTextField2.setText("11/22");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -143,6 +170,7 @@ public class View extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("VCC");
 
+        jTextField3.setText("122");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -164,71 +192,39 @@ public class View extends javax.swing.JFrame {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Total por pagar");
-
-        pagoVisa.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        pagoVisa.setForeground(new java.awt.Color(255, 153, 153));
-        pagoVisa.setText("@pago");
-
-        jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 153, 153));
-        jLabel14.setText("$");
-
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-aterrizaje-50-2.png"))); // NOI18N
-
-        buenViajeLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        buenViajeLabel.setForeground(new java.awt.Color(255, 255, 255));
-        buenViajeLabel.setText("Buen Viaje!");
-
         javax.swing.GroupLayout VisaLayout = new javax.swing.GroupLayout(Visa);
         Visa.setLayout(VisaLayout);
         VisaLayout.setHorizontalGroup(
             VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VisaLayout.createSequentialGroup()
                 .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buenViajeLabel)
-                    .addGroup(VisaLayout.createSequentialGroup()
-                        .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(VisaLayout.createSequentialGroup()
+                            .addGap(25, 25, 25)
                             .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4))
+                                .addComponent(jLabel7))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextField1)
                                 .addGroup(VisaLayout.createSequentialGroup()
-                                    .addGap(25, 25, 25)
-                                    .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel4))
-                                        .addComponent(jLabel7))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextField1)
-                                        .addGroup(VisaLayout.createSequentialGroup()
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(38, 38, 38)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jTextField3))
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(VisaLayout.createSequentialGroup()
-                                    .addGap(163, 163, 163)
-                                    .addComponent(botonComprar)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VisaLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel8)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(VisaLayout.createSequentialGroup()
-                                .addGap(64, 64, 64)
-                                .addComponent(jLabel12))
-                            .addGroup(VisaLayout.createSequentialGroup()
-                                .addGap(93, 93, 93)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pagoVisa)
-                                    .addComponent(jLabel15))))))
-                .addContainerGap(116, Short.MAX_VALUE))
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(38, 38, 38)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField3))
+                                .addComponent(cardHolder, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(VisaLayout.createSequentialGroup()
+                            .addGap(163, 163, 163)
+                            .addComponent(botonComprar)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VisaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8)))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         VisaLayout.setVerticalGroup(
             VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,18 +232,7 @@ public class View extends javax.swing.JFrame {
                 .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(VisaLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(VisaLayout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(47, 47, 47)
-                                .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(pagoVisa)
-                                    .addComponent(jLabel14))
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel15)
-                                .addGap(33, 33, 33)
-                                .addComponent(buenViajeLabel))
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(VisaLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel8)
@@ -264,13 +249,13 @@ public class View extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cardHolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(botonComprar)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        Paypal.setBackground(new java.awt.Color(224, 224, 224));
+        Paypal.setBackground(new java.awt.Color(31, 75, 119));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -278,13 +263,13 @@ public class View extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/pp.png"))); // NOI18N
         jLabel11.setMaximumSize(new java.awt.Dimension(100, 100));
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 255));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Pagar");
-        jButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        PagarPayPal.setBackground(new java.awt.Color(0, 153, 255));
+        PagarPayPal.setForeground(new java.awt.Color(255, 255, 255));
+        PagarPayPal.setText("Pagar");
+        PagarPayPal.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        PagarPayPal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                PagarPayPalActionPerformed(evt);
             }
         });
 
@@ -299,24 +284,23 @@ public class View extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel23))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel22)
-                            .addComponent(jLabel23))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(97, Short.MAX_VALUE))
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PagarPayPal, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(169, 169, 169))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(112, 112, 112))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,8 +316,8 @@ public class View extends javax.swing.JFrame {
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addComponent(PagarPayPal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -348,20 +332,20 @@ public class View extends javax.swing.JFrame {
             .addGroup(PaypalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel10)
-                .addGap(58, 58, 58)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PaypalLayout.createSequentialGroup()
+                .addContainerGap(57, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addGap(62, 62, 62))
         );
         PaypalLayout.setVerticalGroup(
             PaypalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PaypalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(PaypalLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         MasterCard.setBackground(new java.awt.Color(31, 75, 119));
@@ -402,24 +386,6 @@ public class View extends javax.swing.JFrame {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        pagoMasterCard.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        pagoMasterCard.setForeground(new java.awt.Color(255, 153, 153));
-        pagoMasterCard.setText("@pago");
-
-        jLabel19.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("Total por pagar");
-
-        jLabel20.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 153, 153));
-        jLabel20.setText("$");
-
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-aterrizaje-50-2.png"))); // NOI18N
-
-        buenViajeLabelMasterCard.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        buenViajeLabelMasterCard.setForeground(new java.awt.Color(255, 255, 255));
-        buenViajeLabelMasterCard.setText("Buen Viaje!");
-
         javax.swing.GroupLayout MasterCardLayout = new javax.swing.GroupLayout(MasterCard);
         MasterCard.setLayout(MasterCardLayout);
         MasterCardLayout.setHorizontalGroup(
@@ -453,19 +419,7 @@ public class View extends javax.swing.JFrame {
                                 .addComponent(botonComprarMasterCard)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addGroup(MasterCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buenViajeLabelMasterCard)
-                    .addGroup(MasterCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel19)
-                        .addGroup(MasterCardLayout.createSequentialGroup()
-                            .addGap(29, 29, 29)
-                            .addComponent(jLabel20)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(MasterCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(pagoMasterCard)
-                                .addComponent(jLabel21)))))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         MasterCardLayout.setVerticalGroup(
             MasterCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -492,26 +446,15 @@ public class View extends javax.swing.JFrame {
                         .addComponent(botonComprarMasterCard))
                     .addGroup(MasterCardLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(MasterCardLayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel19)
-                        .addGap(47, 47, 47)
-                        .addGroup(MasterCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(pagoMasterCard)
-                            .addComponent(jLabel20))
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel21)
-                        .addGap(33, 33, 33)
-                        .addComponent(buenViajeLabelMasterCard)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout LayerPaneLayout = new javax.swing.GroupLayout(LayerPane);
         LayerPane.setLayout(LayerPaneLayout);
         LayerPaneLayout.setHorizontalGroup(
             LayerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Visa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Visa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(LayerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Paypal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(LayerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -522,9 +465,8 @@ public class View extends javax.swing.JFrame {
             .addComponent(Visa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(LayerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(LayerPaneLayout.createSequentialGroup()
-                    .addContainerGap()
                     .addComponent(Paypal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(19, Short.MAX_VALUE)))
+                    .addGap(0, 19, Short.MAX_VALUE)))
             .addGroup(LayerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(MasterCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -532,58 +474,65 @@ public class View extends javax.swing.JFrame {
         LayerPane.setLayer(Paypal, javax.swing.JLayeredPane.DEFAULT_LAYER);
         LayerPane.setLayer(MasterCard, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        jPanel1.add(LayerPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 378, -1, -1));
+
         jButton2.setText("Seleccionar Metodo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(298, 340, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1072, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(456, 456, 456)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(487, 487, 487)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LayerPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(comboPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1)
-                .addGap(8, 8, 8)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(comboPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addGap(18, 18, 18)
-                .addComponent(LayerPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel24.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Vuelo Seleccionado");
+        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 350, -1, -1));
+
+        selecRuta.setEditable(false);
+        selecRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecRutaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(selecRuta, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 410, 200, -1));
+
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Ruta");
+        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, -1, -1));
+
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Fecha");
+        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, 40, -1));
+
+        selectFehca.setEditable(false);
+        selectFehca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectFehcaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(selectFehca, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 450, 200, -1));
+
+        jLabel20.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(153, 255, 255));
+        jLabel20.setText("$");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 510, -1, -1));
+
+        pagoLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        pagoLabel.setForeground(new java.awt.Color(153, 255, 255));
+        pagoLabel.setText("0.00");
+        jPanel1.add(pagoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 510, -1, -1));
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/avion.png"))); // NOI18N
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 590, -1, -1));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-búsqueda-50.png"))); // NOI18N
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -593,7 +542,7 @@ public class View extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
         );
 
         pack();
@@ -607,17 +556,9 @@ public class View extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void PagarPayPalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PagarPayPalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_PagarPayPalActionPerformed
 
     private void comboPagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPagosActionPerformed
         // TODO add your handling code here:
@@ -626,70 +567,82 @@ public class View extends javax.swing.JFrame {
     private void comboPagosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboPagosMouseClicked
         // TODO add your handling code here:
         //combo Elegir
-       
+
     }//GEN-LAST:event_comboPagosMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         int i;
+        int i;
         i = comboPagos.getSelectedIndex();
-        switch(i){
+        switch (i) {
             case 0:
-                Visa.setVisible(true);break;
+                Visa.setVisible(true);
+                MasterCard.setVisible(false);
+                Paypal.setVisible(false);
+                break;
             case 1:
-                Paypal.setVisible(true);break;
+                Paypal.setVisible(true);
+                MasterCard.setVisible(false);
+                Visa.setVisible(false);
+                break;
             case 2:
-                MasterCard.setVisible(true);break;
-                default:break;
-                       
+                MasterCard.setVisible(true);
+                Visa.setVisible(false);
+                Paypal.setVisible(false);
+                break;
+            default:
+                break;
+
         }
+        cardHolder.setText(model.getUser().getNombre() + " "+model.getUser().getApellidos());
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void selecRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecRutaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selecRutaActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new View().setVisible(true);
-            }
-        });
-    }
+    private void selectFehcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectFehcaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectFehcaActionPerformed
+
+    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField10ActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void tablaVuelosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVuelosMouseClicked
+        // TODO add your handling code here:
+        //seleccionar
+        String id;
+        if (evt.getClickCount() == 2) {
+            int row = this.tablaVuelos.getSelectedRow();
+            id = tablaVuelos.getValueAt(row, 1).toString();
+            selecRuta.setText(id);
+            id = tablaVuelos.getValueAt(row, 4).toString();
+            selectFehca.setText(id);
+            id = tablaVuelos.getValueAt(row, 8).toString();
+            pagoLabel.setText(id);
+        }
+    }//GEN-LAST:event_tablaVuelosMouseClicked
+
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+        // TODO add your handling code here:
+        controller.leerDatos();
+    }//GEN-LAST:event_jLabel14MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane LayerPane;
     private javax.swing.JPanel MasterCard;
+    private javax.swing.JButton PagarPayPal;
     private javax.swing.JPanel Paypal;
     private javax.swing.JPanel Visa;
     private javax.swing.JLabel botonComprar;
     private javax.swing.JLabel botonComprarMasterCard;
-    private javax.swing.JLabel buenViajeLabel;
-    private javax.swing.JLabel buenViajeLabelMasterCard;
+    private javax.swing.JTextField cardHolder;
     private javax.swing.JComboBox comboPagos;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -697,16 +650,16 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -719,18 +672,52 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
-    private javax.swing.JLabel pagoMasterCard;
-    private javax.swing.JLabel pagoVisa;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel pagoLabel;
+    private javax.swing.JTextField selecRuta;
+    private javax.swing.JTextField selectFehca;
+    private javax.swing.JTable tablaVuelos;
     // End of variables declaration//GEN-END:variables
+       
+    
+    public Model model;
+    public Controller controller;
+
+    public void setModelo(Model modelo) {
+        this.model = modelo;
+        this.model.addObserver(this);
+    }
+
+    public void setControlador(Controller controlador) {
+        this.controller = controlador;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public Controller getController() {
+        return controller;
+    }
+    
+    
+    @Override
+    public void update(Observable o, Object arg) {
+        cardHolder.setText(model.getUser().getNombre() + " "+model.getUser().getApellidos());
+        this.tablaVuelos.setModel(new VuelosTableModel(model.getVuelos()));
+        this.tablaVuelos.setRowHeight(20);
+        this.tablaVuelos.getTableHeader().setBackground(Color.DARK_GRAY);
+        this.tablaVuelos.getTableHeader().setForeground(Color.white);
+
+    }
+    
 }

@@ -6,6 +6,7 @@
 package aerolinea.presentacion.perfil;
 
 import aerolinea.logica.Reservacion;
+import aerolinea.logica.Tiquete;
 import aerolinea.logica.Usuario;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ import java.util.Observer;
 public class Model extends Observable{
     Usuario sesion;
     
+    List<Tiquete> tiquetes;
+    
     List<Reservacion> reservas;
     Reservacion filtroReserva;
 
@@ -26,8 +29,19 @@ public class Model extends Observable{
         this.sesion = new Usuario();
         this.reservas = new ArrayList<>();
         this.filtroReserva = new Reservacion();
+        this.tiquetes = new ArrayList<>();
     }
 
+    public List<Tiquete> getTiquetes() {
+        return tiquetes;
+    }
+
+    public void setTiquetes(List<Tiquete> tiquetes) {
+        this.tiquetes = tiquetes;
+        this.setChanged();
+        this.notifyObservers();
+    }
+    
     public List<Reservacion> getReservas() {
         return reservas;
     }

@@ -44,10 +44,10 @@ public class DaoReservas {
 
     public void ReservacionAdd(Reservacion u) throws Exception {
 
-        String sql = "insert into reservacion (idReserva, vuelo, asiento, "
+        String sql = "insert into reservacion (idReserva, vuelo, "
                 + "Pago_id) "
                 + "values('%s','%s','%s','%s')";
-        sql = String.format(sql,u.getIdReserva(), u.getVuelo(), u.getAsiento(),
+        sql = String.format(sql,u.getIdReserva(), u.getVuelo(),
                 u.getPago_id());
         int count = db.executeUpdate(sql);
         if (count == 0) {
@@ -57,9 +57,9 @@ public class DaoReservas {
 
     public void ReservacionUpdate(Reservacion u) throws Exception {
         String sql = "update reservacion set idReserva = '%s', vuelo='%s' "
-                + ",asiento='%s', Pago_id='%s',"
+                + ", Pago_id='%s',"
                 + " where idReserva='%s'";
-        sql = String.format(sql,u.getIdReserva(), u.getVuelo(), u.getAsiento(),
+        sql = String.format(sql,u.getIdReserva(), u.getVuelo(),
                 u.getPago_id());
 
         int count = db.executeUpdate(sql);
@@ -105,7 +105,6 @@ public class DaoReservas {
             Reservacion u = new Reservacion();
             u.setIdReserva(rs.getString("idReserva"));
             u.setVuelo(rs.getString("vuelo"));
-            u.setAsiento(rs.getString("asiento"));
             u.setPago_id(rs.getString("Pago_id"));
             return u;
         } catch (SQLException ex) {

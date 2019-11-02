@@ -39,6 +39,30 @@ public class DaoVuelo {
             throw new Exception("Vuelo no Existe");
         }
     }
+
+    public Vuelo buscarPorVuelo(String destino, String origen, String fecha) throws Exception {
+
+        String sql = "select "
+                + "ruta, ciudadDestino, ciudadOrigen, fecha, "
+                + "horaSalida,horaLlegada,duracion, precio, numPasajeros, "
+                + "marca, modelo, anno   "
+                + "from vuelo v "
+                + "inner join avion a on v.avion = a.idTipoAvion "
+                + "inner join ruta r on v.ruta = r.codigoRuta "
+                + "inner join horario h on v.horario = h.idhorario"
+                + "where "
+                + "r.ciudadDestino='%s' "
+                + "AND r.ciudadOrigen = '%s' "
+                + "AND h.fecha = '%s'";
+        sql = String.format(sql, destino, origen, fecha);
+        ResultSet rs = db.executeQuery(sql);
+        if (rs.next()) {
+            return Vuelo(rs);
+        } else {
+            throw new Exception("Vuelo no Existe");
+        }
+    }
+
     public void VuelosAdd(Vuelo u) throws Exception {
 
         String sql = "insert into vuelo value('%s','%s','%s','%s') ";
@@ -49,27 +73,28 @@ public class DaoVuelo {
             throw new Exception("Vuelo ya existe");
         }
     }
-    public int getCantidadRegistros() throws Exception{
+
+    public int getCantidadRegistros() throws Exception {
         String sql = "select count(*) from vuelo";
         int count = db.executeUpdate(sql);
-        if(count == 0){
+        if (count == 0) {
             return 0;
         }
         return count;
     }
-    
+
     public List<Vuelo> VueloSearch(String s) {
         List<Vuelo> resultado = new ArrayList<Vuelo>();
         try {
             String sql = "select "
-                + "idvuelo, ruta, ciudadDestino, ciudadOrigen, fecha, "
-                + "horaSalida,horaLlegada,duracion, precio, numPasajeros, "
-                + "marca, modelo, anno "
-                + "from vuelo v "
-                + "inner join avion a on v.avion = a.idTipoAvion "
-                + "inner join ruta r on v.ruta = r.codigoRuta "
-                + "inner join horario h on v.horario = h.idhorario"
-                + "where v.idvuelo = '%%%s%%' ";
+                    + "idvuelo, ruta, ciudadDestino, ciudadOrigen, fecha, "
+                    + "horaSalida,horaLlegada,duracion, precio, numPasajeros, "
+                    + "marca, modelo, anno "
+                    + "from vuelo v "
+                    + "inner join avion a on v.avion = a.idTipoAvion "
+                    + "inner join ruta r on v.ruta = r.codigoRuta "
+                    + "inner join horario h on v.horario = h.idhorario"
+                    + "where v.idvuelo = '%%%s%%' ";
             sql = String.format(sql, s);
             ResultSet rs = db.executeQuery(sql);
             while (rs.next()) {
@@ -80,17 +105,25 @@ public class DaoVuelo {
         return resultado;
 
     }
-    public List<Vuelo> VueloSearchEO() {
+
+    public List<Vuelo> VueloSearch(String s, String b, String c) { //origen, destino ,fecha
         List<Vuelo> resultado = new ArrayList<Vuelo>();
+        String sql="";
+                sql = "select "
+                    + "idvuelo, ruta, ciudadDestino, ciudadOrigen, fecha, "
+                    + "horaSalida,horaLlegada,duracion, precio, numPasajeros, "
+                    + "marca, modelo, anno "
+                    + "from vuelo v "
+                    + "inner join avion a on v.avion = a.idTipoAvion "
+                    + "inner join ruta r on v.ruta = r.codigoRuta "
+                    + "inner join horario h on v.horario = h.idhorario "
+                    + "where "
+                    + "r.ciudadDestino = '%s' "
+                    + "OR r.ciudadOrigen = '%s' "
+                    + "OR h.fecha = '%s'";
+        sql = String.format(sql, b, s, c);
         try {
-            String sql = "select "
-                + "idvuelo, ruta, ciudadDestino, ciudadOrigen, fecha, "
-                + "horaSalida,horaLlegada,duracion, precio, numPasajeros, "
-                + "marca, modelo, anno "
-                + "from vuelo v "
-                + "inner join avion a on v.avion = a.idTipoAvion "
-                + "inner join ruta r on v.ruta = r.codigoRuta "
-                + "inner join horario h on v.horario = h.idhorario";
+
             ResultSet rs = db.executeQuery(sql);
             while (rs.next()) {
                 resultado.add(Vuelo(rs));
@@ -100,6 +133,50 @@ public class DaoVuelo {
         return resultado;
 
     }
+
+    public List<Vuelo> VueloSearchEO() {
+        List<Vuelo> resultado = new ArrayList<Vuelo>();
+        try {
+            String sql = "select "
+                    + "idvuelo, ruta, ciudadDestino, ciudadOrigen, fecha, "
+                    + "horaSalida,horaLlegada,duracion, precio, numPasajeros, "
+                    + "marca, modelo, anno "
+                    + "from vuelo v "
+                    + "inner join avion a on v.avion = a.idTipoAvion "
+                    + "inner join ruta r on v.ruta = r.codigoRuta "
+                    + "inner join horario h on v.horario = h.idhorario";
+            ResultSet rs = db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(Vuelo(rs));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+
+    }
+    public List<Vuelo> VueloSearchDescuento() {
+        List<Vuelo> resultado = new ArrayList<Vuelo>();
+        try {
+            String sql = "select "
+                    + "idvuelo, ruta, ciudadDestino, ciudadOrigen, fecha, "
+                    + "horaSalida,horaLlegada,duracion, precio, numPasajeros, "
+                    + "marca, modelo, anno "
+                    + "from vuelo v "
+                    + "inner join avion a on v.avion = a.idTipoAvion "
+                    + "inner join ruta r on v.ruta = r.codigoRuta "
+                    + "inner join horario h on v.horario = h.idhorario";
+            ResultSet rs = db.executeQuery(sql);
+            while (rs.next()) {
+                if(Integer.parseInt(Vuelo(rs).getHorario().getPrecio()) <= 100){
+                    resultado.add(Vuelo(rs));
+                }
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+
+    }
+
     private Vuelo Vuelo(ResultSet rs) {
         try {
             Vuelo u = new Vuelo();
@@ -113,6 +190,7 @@ public class DaoVuelo {
             return null;
         }
     }
+
     private Avion Avion(ResultSet rs) {
         try {
             Avion u = new Avion();
@@ -130,6 +208,7 @@ public class DaoVuelo {
             return null;
         }
     }
+
     private Horario Horario(ResultSet rs) {
         try {
             Horario u = new Horario();
@@ -146,6 +225,7 @@ public class DaoVuelo {
             return null;
         }
     }
+
     private Ruta Ruta(ResultSet rs) {
         try {
             Ruta u = new Ruta();
