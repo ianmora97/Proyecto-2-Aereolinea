@@ -5,15 +5,26 @@
  */
 package application;
 
-import aerolinea.datos.DaoUsuario;
 import aerolinea.logica.Usuario;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 
 public class Model extends Observable{
+    Usuario user;
+
+    public Model() {
+        this.user = new Usuario();
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
+    
     @Override
     public void addObserver(Observer o){
         super.addObserver(o);

@@ -18,6 +18,7 @@ public class HorarioTableModel extends AbstractTableModel {
 
     public HorarioTableModel(List<Horario> horarios) {
         this.horarios = horarios;
+        
     }
 
     public List<Horario> getHorarios() {
@@ -27,6 +28,7 @@ public class HorarioTableModel extends AbstractTableModel {
     public void setHorarios(List<Horario> horarios) {
         this.horarios = horarios;
     }
+    
     @Override
     public int getRowCount() {
         return horarios.size();
@@ -40,8 +42,8 @@ public class HorarioTableModel extends AbstractTableModel {
     @Override    
     public String getColumnName(int columnIndex){
         switch(columnIndex){
-            case 0: return "Id Horario";
-            case 1: return "Duracion Vuelo";
+            case 0: return "Id";
+            case 1: return "Duracion";
             case 2: return "Fecha Salida";
             case 3: return "Hora Salida";
             case 4: return "Hora Llegada";

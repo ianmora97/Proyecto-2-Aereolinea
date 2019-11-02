@@ -18,8 +18,11 @@ public class ModelVuelo {
     public ModelVuelo() {
        vuelos = new DaoVuelo();
     }
+    public int getCant() throws Exception{
+        return vuelos.getCantidadRegistros();
+    }
     public void agregar(Vuelo v) throws Exception {
-//        vuelos.AvionAdd(v);
+        vuelos.VuelosAdd(v);
     }
     public void eliminar(String a) throws Exception{
 //        vuelos.AvionDelete(a);
@@ -37,8 +40,8 @@ public class ModelVuelo {
     }
 
     public List<Vuelo> buscar(String nombre) {
-//        List<Vuelo> result = vuelos.AvionSearch(nombre);
-        return null;
+        List<Vuelo> result = vuelos.VueloSearch(nombre);
+        return result;
     }
     public List<Vuelo> buscarTodos() {
         List<Vuelo> result = vuelos.VueloSearchEO();

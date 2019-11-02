@@ -12,6 +12,7 @@ public class Application {
     public static application.Controller Login_Controller;
     public static application.main.Controller MainApp_Controller;
     public static Listado.Admin.Controller Admin_Controller;
+    public static aerolinea.presentacion.perfil.Controller Perfil_Controller;
 
     public static void main(String[] args) {
 
@@ -34,7 +35,12 @@ public class Application {
         application.View vista3 = new application.View();
         application.Controller controladora3 = new application.Controller(modelo3, vista3);
         Login_Controller = controladora3;
-
+        
+        aerolinea.presentacion.perfil.Model modelo5 = new aerolinea.presentacion.perfil.Model();
+        aerolinea.presentacion.perfil.View view5 = new aerolinea.presentacion.perfil.View();
+        aerolinea.presentacion.perfil.Controller controller5 = new aerolinea.presentacion.perfil.Controller(modelo5, view5);
+        Perfil_Controller = controller5;
+        
         application.main.Model modelo4 = new application.main.Model();
         application.main.View vista4 = new application.main.View();
         application.main.Controller controladora4 = new application.main.Controller(modelo4, vista4);

@@ -40,6 +40,9 @@ public class View extends javax.swing.JFrame implements Observer {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aerolinea");
@@ -133,6 +136,12 @@ public class View extends javax.swing.JFrame implements Observer {
 
         getContentPane().add(jPanel1);
 
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenuBar1.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuBar1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
+        jMenu1.setBorder(null);
+        jMenu1.setForeground(new java.awt.Color(0, 0, 0));
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-undefined-64.png"))); // NOI18N
         jMenu1.setText("Log In");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -142,6 +151,8 @@ public class View extends javax.swing.JFrame implements Observer {
         });
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setBorder(null);
+        jMenu2.setForeground(new java.awt.Color(0, 0, 0));
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-ajustes-50.png"))); // NOI18N
         jMenu2.setText("Administracion");
         jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -150,6 +161,23 @@ public class View extends javax.swing.JFrame implements Observer {
             }
         });
         jMenuBar1.add(jMenu2);
+
+        jMenu4.setBorder(null);
+        jMenu4.setForeground(new java.awt.Color(0, 0, 0));
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/historia.png"))); // NOI18N
+        jMenu4.setText("Historia");
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setBorder(null);
+        jMenu5.setForeground(new java.awt.Color(0, 0, 0));
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-información-50.png"))); // NOI18N
+        jMenu5.setText("Contactenos");
+        jMenuBar1.add(jMenu5);
+
+        jMenu3.setBorder(null);
+        jMenu3.setForeground(new java.awt.Color(0, 0, 0));
+        jMenu3.setText("Referente Institucional");
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -186,6 +214,9 @@ public class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

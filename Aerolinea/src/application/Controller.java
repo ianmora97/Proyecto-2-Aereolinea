@@ -24,11 +24,14 @@ public class Controller {
         view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
        
     }
+    public void setUser(){
+        Application.Perfil_Controller.getModel().setSesion(model.getUser());
+    }
     public void show(){
         view.setVisible(true);
     }
-    public void usuariosListadoShow(){
-        Application.Listado_Usuarios_Controller.show();
+    public void perfilShow(){
+        Application.Perfil_Controller.show();
     }
     public Usuario consultar(String id) throws Exception{
         return aerolinea.logica.ModelUsuarios.instanciar().consultar(id);

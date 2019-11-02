@@ -1,5 +1,6 @@
 package application;
 
+import aerolinea.Application;
 import aerolinea.logica.Usuario;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -162,20 +163,22 @@ public class View extends javax.swing.JFrame implements Observer {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
-        Usuario u;
+        Usuario u = null;
         String UserPass = "";
         String pass = passField.getText();
         try {
             u = controladora.consultar(usuarioTextField.getText());
             UserPass = u.getContrasenna();
         } catch (Exception ex) {
-            System.out.print(ex.getMessage());
+            System.out.println(ex.getMessage());
         }
 
         if (!(UserPass.equals(pass))) {
             JOptionPane.showMessageDialog(this, "Entrada incorrecta");
         } else {
+            Application.Perfil_Controller.getView().crearSesion(u);
             JOptionPane.showMessageDialog(this, "Entrada Correcta");
+            controladora.perfilShow();
         }
     }//GEN-LAST:event_jLabel4MouseClicked
 

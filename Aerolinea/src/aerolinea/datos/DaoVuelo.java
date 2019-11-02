@@ -39,13 +39,54 @@ public class DaoVuelo {
             throw new Exception("Vuelo no Existe");
         }
     }
+    public void VuelosAdd(Vuelo u) throws Exception {
+
+        String sql = "insert into vuelo value('%s','%s','%s','%s') ";
+        sql = String.format(sql, u.getIdVuelo(), u.getAvion().getIdTipoAvion(),
+                u.getRuta().getCodigoRuta(), u.getHorario().getIdHorario());
+        int count = db.executeUpdate(sql);
+        if (count == 0) {
+            throw new Exception("Vuelo ya existe");
+        }
+    }
+    public int getCantidadRegistros() throws Exception{
+        String sql = "select count(*) from vuelo";
+        int count = db.executeUpdate(sql);
+        if(count == 0){
+            return 0;
+        }
+        return count;
+    }
+    
+    public List<Vuelo> VueloSearch(String s) {
+        List<Vuelo> resultado = new ArrayList<Vuelo>();
+        try {
+            String sql = "select "
+                + "idvuelo, ruta, ciudadDestino, ciudadOrigen, fecha, "
+                + "horaSalida,horaLlegada,duracion, precio, numPasajeros, "
+                + "marca, modelo, anno "
+                + "from vuelo v "
+                + "inner join avion a on v.avion = a.idTipoAvion "
+                + "inner join ruta r on v.ruta = r.codigoRuta "
+                + "inner join horario h on v.horario = h.idhorario"
+                + "where v.idvuelo = '%%%s%%' ";
+            sql = String.format(sql, s);
+            ResultSet rs = db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(Vuelo(rs));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+
+    }
     public List<Vuelo> VueloSearchEO() {
         List<Vuelo> resultado = new ArrayList<Vuelo>();
         try {
             String sql = "select "
-                + "ruta, ciudadDestino, ciudadOrigen, fecha, "
+                + "idvuelo, ruta, ciudadDestino, ciudadOrigen, fecha, "
                 + "horaSalida,horaLlegada,duracion, precio, numPasajeros, "
-                + "marca, modelo, anno   "
+                + "marca, modelo, anno "
                 + "from vuelo v "
                 + "inner join avion a on v.avion = a.idTipoAvion "
                 + "inner join ruta r on v.ruta = r.codigoRuta "
@@ -75,10 +116,10 @@ public class DaoVuelo {
     private Avion Avion(ResultSet rs) {
         try {
             Avion u = new Avion();
-            u.setIdTipoAvion(rs.getString("idTipoAvion"));
+            u.setIdTipoAvion("");
             u.setNumPasajeros(rs.getInt("numPasajeros"));
-            u.setFilas(rs.getInt("filas"));
-            u.setAsientos(rs.getInt("asientos"));
+            u.setFilas(0);
+            u.setAsientos(0);
             u.setModelo(rs.getString("modelo"));
             u.setMarca(rs.getString("marca"));
             u.setAnno(rs.getString("anno"));
@@ -92,7 +133,7 @@ public class DaoVuelo {
     private Horario Horario(ResultSet rs) {
         try {
             Horario u = new Horario();
-            u.setIdHorario(rs.getString("idHorario"));
+            u.setIdHorario("");
             u.setDuracion(rs.getString("duracion"));
             u.setFecha(rs.getString("fecha"));
             u.setHoraLlegada(rs.getString("horaLlegada"));
@@ -108,7 +149,7 @@ public class DaoVuelo {
     private Ruta Ruta(ResultSet rs) {
         try {
             Ruta u = new Ruta();
-            u.setCodigoRuta(rs.getString("codigoRuta"));
+            u.setCodigoRuta(rs.getString("ruta"));
             u.setCiudadDestino(rs.getString("ciudadDestino"));
             u.setCiudadOrigen(rs.getString("ciudadOrigen"));
             return u;

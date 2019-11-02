@@ -28,6 +28,7 @@ public class Controller {
         leerDatos();
         view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         view.setTitle("Administracion");
+        
     }
 
     public Model getModel() {
@@ -79,6 +80,10 @@ public class Controller {
     public void editarAviones(int row) throws Exception {
         aerolinea.logica.ModelAviones.instanciar().editar(model.getFiltroAvion().getIdTipoAvion());
     }
+    public Avion consultarAvion(String s) throws Exception{
+        Avion result = aerolinea.logica.ModelAviones.instanciar().consultar(s);
+        return result;
+    }
     public void deleteAviones(String text) throws Exception {
         aerolinea.logica.ModelAviones.instanciar().eliminar(text);
     }
@@ -91,6 +96,10 @@ public class Controller {
     }
     public void deleteRuta(String text) throws Exception{
         aerolinea.logica.ModelRutas.instanciar().eliminar(text);
+    }
+    public Ruta consultarRuta(String s) throws Exception{
+        Ruta result = aerolinea.logica.ModelRutas.instanciar().consultar(s);
+        return result;
     }
     public void buscarRuta(String s){
         model.getFiltroRuta().setCodigoRuta(s);
@@ -109,6 +118,10 @@ public class Controller {
     public void deleteHorario(String text) throws Exception{
         aerolinea.logica.ModelHorarios.instanciar().eliminar(text);
     }
+    public Horario consultarHorario(String s) throws Exception{
+        Horario result = aerolinea.logica.ModelHorarios.instanciar().consultar(s);
+        return result;
+    }
     public void buscarHorario(String s){
         model.getFiltroHorario().setDuracion(s);
         model.setHorarios(aerolinea.logica.ModelHorarios.instanciar().buscar(model.getFiltroHorario().getDuracion()));
@@ -118,17 +131,20 @@ public class Controller {
     }
     /*----------------------------------METODOS DE VUELOS------------------------------*/
     public void insertarVuelo() throws Exception {
-        aerolinea.logica.ModelHorarios.instanciar().agregar(model.filtroHorario);
+        aerolinea.logica.ModelVuelo.instanciar().agregar(model.filtrVuelo);
     }
     public void editarVuelo(int row) throws Exception{
         aerolinea.logica.ModelHorarios.instanciar().editar(model.getFiltroHorario().getDuracion());
+    }
+    public int getCant() throws Exception{
+        return aerolinea.logica.ModelVuelo.instanciar().getCant();
     }
     public void deleteVuelo(String text) throws Exception{
         aerolinea.logica.ModelHorarios.instanciar().eliminar(text);
     }
     public void buscarVuelo(String s){
-        model.getFiltroHorario().setDuracion(s);
-        model.setHorarios(aerolinea.logica.ModelHorarios.instanciar().buscar(model.getFiltroHorario().getDuracion()));
+        model.getFiltrVuelo().setIdVuelo(s);
+        model.setVuelos(aerolinea.logica.ModelVuelo.instanciar().buscar(model.getFiltrVuelo().getIdVuelo()));
     }
     public void updateVuelo(Horario horario) throws Exception {
         aerolinea.logica.ModelHorarios.instanciar().modificar(horario);

@@ -7,7 +7,7 @@ package aerolinea.logica;
 
 /**
  *
- * @author Gaby
+ * @author Ian Rodriguez
  */
 public class Tiquete {
     String numTiquete;

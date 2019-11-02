@@ -34,24 +34,25 @@ public class VuelosTableModel extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 12;
+        return 13;
     }
     
     @Override    
     public String getColumnName(int columnIndex){
         switch(columnIndex){
-            case 0: return "Ruta";
-            case 1: return "Destino";
-            case 2: return "Origen";
-            case 3: return "Fecha";
-            case 4: return "Salida";
-            case 5: return "Llegada";
-            case 6: return "Duracion";
-            case 7: return "Precio";
-            case 8: return "Cantidad";
-            case 9: return "Marca";
-            case 10: return "Modelo";
-            case 11: return "Año";
+            case 0: return "Vuelo";
+            case 1: return "Ruta";
+            case 2: return "Destino";
+            case 3: return "Origen";
+            case 4: return "Fecha";
+            case 5: return "Salida";
+            case 6: return "Llegada";
+            case 7: return "Duracion";
+            case 8: return "Precio";
+            case 9: return "Cantidad";
+            case 10: return "Marca";
+            case 11: return "Modelo";
+            case 12: return "Año";
             default: return "";
         }        
     }
@@ -60,18 +61,19 @@ public class VuelosTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Vuelo v = vuelos.get(rowIndex);
         switch(columnIndex){
-            case 0: return v.getRuta().getCodigoRuta();
-            case 1: return v.getRuta().getCiudadDestino();
-            case 2: return v.getRuta().getCiudadOrigen();
-            case 3: return v.getHorario().getFecha();
-            case 4: return v.getHorario().getHoraSalida();
-            case 5: return v.getHorario().getHoraLlegada();
-            case 6: return v.getHorario().getDuracion();
-            case 7: return v.getHorario().getPrecio();
-            case 8: return v.getAvion().getNumPasajeros();
-            case 9: return v.getAvion().getMarca();
-            case 10: return v.getAvion().getModelo();
-            case 11: return v.getAvion().getAnno();
+            case 0: return v.getIdVuelo();
+            case 1: return v.getRuta().getCodigoRuta();
+            case 2: return v.getRuta().getCiudadDestino();
+            case 3: return v.getRuta().getCiudadOrigen();
+            case 4: return v.getHorario().getFecha();
+            case 5: return v.getHorario().getHoraSalida();
+            case 6: return v.getHorario().getHoraLlegada();
+            case 7: return v.getHorario().getDuracion();
+            case 8: return v.getHorario().getPrecio();
+            case 9: return v.getAvion().getNumPasajeros();
+            case 10: return v.getAvion().getMarca();
+            case 11: return v.getAvion().getModelo();
+            case 12: return v.getAvion().getAnno();
             default: return "";
         }
     }
