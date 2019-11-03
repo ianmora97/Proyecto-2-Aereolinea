@@ -118,9 +118,9 @@ public class DaoVuelo {
                     + "inner join ruta r on v.ruta = r.codigoRuta "
                     + "inner join horario h on v.horario = h.idhorario "
                     + "where "
-                    + "r.ciudadDestino = '%s' "
-                    + "OR r.ciudadOrigen = '%s' "
-                    + "OR h.fecha = '%s'";
+                    + "r.ciudadDestino LIKE '%%%s%%' "
+                    + "AND r.ciudadOrigen LIKE '%%%s%%' "
+                    + "AND h.fecha LIKE '%%%s%%'";
         sql = String.format(sql, b, s, c);
         try {
 
