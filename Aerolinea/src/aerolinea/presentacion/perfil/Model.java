@@ -21,6 +21,7 @@ public class Model extends Observable{
     Usuario sesion;
     
     List<Tiquete> tiquetes;
+    Tiquete filtroTiquete;
     
     List<Reservacion> reservas;
     Reservacion filtroReserva;
@@ -30,8 +31,19 @@ public class Model extends Observable{
         this.reservas = new ArrayList<>();
         this.filtroReserva = new Reservacion();
         this.tiquetes = new ArrayList<>();
+        this.filtroTiquete = new Tiquete();
     }
 
+    public Tiquete getFiltroTiquete() {
+        return filtroTiquete;
+    }
+
+    public void setFiltroTiquete(Tiquete filtroTiquete) {
+        this.filtroTiquete = filtroTiquete;
+        this.setChanged();
+        this.notifyObservers();
+    }
+    
     public List<Tiquete> getTiquetes() {
         return tiquetes;
     }

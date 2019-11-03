@@ -6,7 +6,6 @@
 package aerolinea.presentacion.perfil;
 
 import aerolinea.Application;
-import aerolinea.logica.Avion;
 import aerolinea.logica.Tiquete;
 import aerolinea.logica.Usuario;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
@@ -34,6 +33,10 @@ public class Controller {
     public Tiquete consultar(String s) throws Exception{
         Tiquete result = aerolinea.logica.ModelTiquetes.instanciar().consultar(s);
         return result;
+    }
+    public void getListBy(String s)throws Exception{
+        model.getFiltroTiquete().setNumTiquete(s);
+        this.model.setTiquetes(aerolinea.logica.ModelTiquetes.instanciar().selectReserva(s));
     }
     public void compraTiquetesShow(){
         Application.Compra_Controller.show();

@@ -26,6 +26,10 @@ public class ModelTiquetes {
         List<Tiquete> result = tiquetes.TiqueteSearchEO();
         return result;
     }
+    public List<Tiquete> selectReserva(String s) {
+        List<Tiquete> result = tiquetes.getTiquetesList(s);
+        return result;
+    }
     static ModelTiquetes instancia;
 
     public static ModelTiquetes instanciar() {

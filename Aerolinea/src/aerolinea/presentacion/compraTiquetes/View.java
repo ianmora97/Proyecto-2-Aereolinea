@@ -59,6 +59,8 @@ public class View extends javax.swing.JFrame implements Observer{
         jLabel8 = new javax.swing.JLabel();
         botonComprar = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         Paypal = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -83,8 +85,6 @@ public class View extends javax.swing.JFrame implements Observer{
         jButton2 = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
         selecRuta = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
         selectFehca = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         pagoLabel = new javax.swing.JLabel();
@@ -98,7 +98,6 @@ public class View extends javax.swing.JFrame implements Observer{
         setIconImage(getIconImage());
 
         jPanel1.setBackground(new java.awt.Color(31, 75, 119));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaVuelos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,21 +117,16 @@ public class View extends javax.swing.JFrame implements Observer{
         });
         jScrollPane1.setViewportView(tablaVuelos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 128, 1089, 180));
-
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Compra de Tiquetes");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Seleccione un Vuelo");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Metodo de pago");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 346, -1, -1));
 
         comboPagos.setMaximumRowCount(3);
         comboPagos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Visa", "PayPal", "MasterCard", " " }));
@@ -146,7 +140,6 @@ public class View extends javax.swing.JFrame implements Observer{
                 comboPagosActionPerformed(evt);
             }
         });
-        jPanel1.add(comboPagos, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 343, -1, -1));
 
         LayerPane.setMaximumSize(new java.awt.Dimension(1250, 1250));
 
@@ -192,6 +185,12 @@ public class View extends javax.swing.JFrame implements Observer{
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Ruta");
+
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Fecha");
+
         javax.swing.GroupLayout VisaLayout = new javax.swing.GroupLayout(Visa);
         Visa.setLayout(VisaLayout);
         VisaLayout.setHorizontalGroup(
@@ -224,15 +223,16 @@ public class View extends javax.swing.JFrame implements Observer{
                         .addComponent(jLabel8)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         VisaLayout.setVerticalGroup(
             VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VisaLayout.createSequentialGroup()
                 .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VisaLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(VisaLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel8)
@@ -251,7 +251,15 @@ public class View extends javax.swing.JFrame implements Observer{
                             .addComponent(jLabel7)
                             .addComponent(cardHolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(botonComprar)))
+                        .addComponent(botonComprar))
+                    .addGroup(VisaLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(VisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(VisaLayout.createSequentialGroup()
+                                .addComponent(jLabel25)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel26))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -334,7 +342,7 @@ public class View extends javax.swing.JFrame implements Observer{
                 .addComponent(jLabel10)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PaypalLayout.createSequentialGroup()
-                .addContainerGap(57, Short.MAX_VALUE)
+                .addContainerGap(85, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62))
         );
@@ -419,7 +427,7 @@ public class View extends javax.swing.JFrame implements Observer{
                                 .addComponent(botonComprarMasterCard)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         MasterCardLayout.setVerticalGroup(
             MasterCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -474,20 +482,16 @@ public class View extends javax.swing.JFrame implements Observer{
         LayerPane.setLayer(Paypal, javax.swing.JLayeredPane.DEFAULT_LAYER);
         LayerPane.setLayer(MasterCard, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jPanel1.add(LayerPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 378, -1, -1));
-
         jButton2.setText("Seleccionar Metodo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(298, 340, -1, -1));
 
         jLabel24.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Vuelo Seleccionado");
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 350, -1, -1));
 
         selecRuta.setEditable(false);
         selecRuta.addActionListener(new java.awt.event.ActionListener() {
@@ -495,15 +499,6 @@ public class View extends javax.swing.JFrame implements Observer{
                 selecRutaActionPerformed(evt);
             }
         });
-        jPanel1.add(selecRuta, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 410, 200, -1));
-
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel25.setText("Ruta");
-        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, -1, -1));
-
-        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel26.setText("Fecha");
-        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, 40, -1));
 
         selectFehca.setEditable(false);
         selectFehca.addActionListener(new java.awt.event.ActionListener() {
@@ -511,20 +506,16 @@ public class View extends javax.swing.JFrame implements Observer{
                 selectFehcaActionPerformed(evt);
             }
         });
-        jPanel1.add(selectFehca, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 450, 200, -1));
 
         jLabel20.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(153, 255, 255));
         jLabel20.setText("$");
-        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 510, -1, -1));
 
         pagoLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         pagoLabel.setForeground(new java.awt.Color(153, 255, 255));
         pagoLabel.setText("0.00");
-        jPanel1.add(pagoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 510, -1, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/avion.png"))); // NOI18N
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 590, -1, -1));
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aerolinea/media/icons8-búsqueda-50.png"))); // NOI18N
         jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -532,7 +523,85 @@ public class View extends javax.swing.JFrame implements Observer{
                 jLabel14MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, -1, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel1))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jLabel2)
+                .addGap(305, 305, 305)
+                .addComponent(jLabel14))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1089, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(comboPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(59, 59, 59)
+                .addComponent(jLabel24))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(LayerPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(selecRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectFehca, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel20)
+                        .addGap(7, 7, 7)
+                        .addComponent(pagoLabel))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel12))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel1)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel14))
+                .addGap(8, 8, 8)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(comboPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel24)))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LayerPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(selecRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addComponent(selectFehca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel20)
+                            .addComponent(pagoLabel))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel12))))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -542,7 +611,7 @@ public class View extends javax.swing.JFrame implements Observer{
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

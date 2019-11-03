@@ -5,7 +5,9 @@
  */
 package aerolinea.datos;
 
+import aerolinea.logica.Reservacion;
 import aerolinea.logica.Tiquete;
+import aerolinea.logica.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,12 +18,13 @@ import java.util.List;
  * @author Ian Rodriguez
  */
 public class DaoTiquetes {
-    
+
     RelDatabase db;
 
     public DaoTiquetes() {
         db = new RelDatabase();
     }
+
     public Tiquete getTiquete(String id) throws Exception {
 
         String sql = "select * from tiquete u where u.idReserva='%s'";
@@ -33,10 +36,27 @@ public class DaoTiquetes {
             return null;
         }
     }
+    public List<Tiquete> TiqueteSearchEO() {
+        List<Tiquete> resultado = new ArrayList<Tiquete>();
+        try {
+            String sql = "select * from tiquete";
+            ResultSet rs = db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(Tiquete(rs));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+
+    }
     public List<Tiquete> getTiquetesList(String s) {
         List<Tiquete> resultado = new ArrayList<Tiquete>();
         try {
-            String sql = "select * from tiquete u where u.reservacion='%s'";
+            String sql = "select numTiquete,reserva,nombre,asiento "
+                    + "from tiquete v "
+                    + "inner join reservacion a on v.reserva = a.idReserva "
+                    + "inner join usuario u on v.Usuario_id = u.idUsuario "
+                    + "where a.idReserva like '%%%s%%'";
             sql = String.format(sql, s);
             ResultSet rs = db.executeQuery(sql);
             while (rs.next()) {
@@ -47,26 +67,14 @@ public class DaoTiquetes {
         return resultado;
 
     }
-    public List<Tiquete> TiqueteSearchEO() {
-        List<Tiquete> resultado = new ArrayList<Tiquete>();
-        try {
-            String sql = "select * "
-                    + "from tiquete ";
-            ResultSet rs = db.executeQuery(sql);
-            while (rs.next()) {
-                resultado.add(Tiquete(rs));
-            }
-        } catch (SQLException ex) {
-        }
-        return resultado;
 
-    }
+    
 
     private Tiquete Tiquete(ResultSet rs) {
         try {
             Tiquete u = new Tiquete();
             u.setNumTiquete(rs.getString("numTiquete"));
-            u.setReservacion(rs.getString("reservacion"));
+            u.setReservacion(rs.getString("reserva"));
             u.setUsuario(rs.getString("Usuario_id"));
             u.setAsiento(rs.getString("asiento"));
 
