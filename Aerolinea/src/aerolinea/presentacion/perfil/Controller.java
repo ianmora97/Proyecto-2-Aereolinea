@@ -29,6 +29,7 @@ public class Controller {
         model.setTiquetes(aerolinea.logica.ModelTiquetes.instanciar().buscarTodos());
         view.cargarUsuario();
         this.view.crearSesion();
+        
     }
     public Tiquete consultar(String s) throws Exception{
         Tiquete result = aerolinea.logica.ModelTiquetes.instanciar().consultar(s);

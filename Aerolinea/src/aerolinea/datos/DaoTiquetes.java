@@ -36,6 +36,18 @@ public class DaoTiquetes {
             return null;
         }
     }
+    public void ReservacionAdd(Tiquete u) throws Exception {
+
+        String sql = "insert into tiquete (numTiquete, reserva, "
+                + "Usuario_id, asiento) "
+                + "values('%s','%s','%s','%s')";
+        sql = String.format(sql,u.getNumTiquete(), u.getReservacion(),
+                u.getUsuario(), u.getAsiento());
+        int count = db.executeUpdate(sql);
+        if (count == 0) {
+            throw new Exception("El tiquete ya existe");
+        }
+    }
     public List<Tiquete> TiqueteSearchEO() {
         List<Tiquete> resultado = new ArrayList<Tiquete>();
         try {

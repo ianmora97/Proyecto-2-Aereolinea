@@ -22,17 +22,19 @@ public class Model extends Observable{
     Vuelo filtrVuelo;
     
     Usuario user;
+    public String nombreUser;
 
     public Model() {
         vuelos = new ArrayList<>();
         filtrVuelo = new Vuelo();
         user = Application.Perfil_Controller.getModel().getSesion();
+
     }
 
     public Usuario getUser() {
         return user;
     }
-
+    
     public void setUser(Usuario user) {
         this.user = user;
         this.setChanged();

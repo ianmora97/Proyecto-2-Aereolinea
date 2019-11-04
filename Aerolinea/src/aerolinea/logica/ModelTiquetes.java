@@ -18,6 +18,9 @@ public class ModelTiquetes {
     public ModelTiquetes() {
        tiquetes = new DaoTiquetes();
     }
+    public void agregar(Tiquete t) throws Exception{
+        tiquetes.ReservacionAdd(t);
+    }
     public Tiquete consultar(String id) throws Exception {
         Tiquete result = tiquetes.getTiquete(id);
         return result;

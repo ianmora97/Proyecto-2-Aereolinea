@@ -14,7 +14,15 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 public class MatrizBoton extends JFrame implements ActionListener {
+    
+    int filas,columnas;
 
+    JButton btnCrear;
+    JTextField txtColumnas;
+    JTextField txtFilas;
+    JPanel panel;
+    JScrollPane scrPane = new JScrollPane(panel);
+    
     public MatrizBoton() {
         JToolBar barraHerramientas = new JToolBar();
         JLabel lblFilas = new JLabel();
@@ -24,7 +32,6 @@ public class MatrizBoton extends JFrame implements ActionListener {
         btnCrear = new JButton();
         panel = new JPanel(null);
 
-        //Para que el JFrame cierre la aplicacion
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         lblFilas.setText("Filas");
@@ -53,11 +60,23 @@ public class MatrizBoton extends JFrame implements ActionListener {
         //Permite que la ventana se coloque al centro de la pantalla
         this.setLocationRelativeTo(null);
 
-        scrPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        this.getContentPane().add(scrPane);
+    }
+    public int getFilas() {
+        return filas;
     }
 
+    public void setFilas(int filas) {
+        this.filas = filas;
+    }
+
+    public int getColumnas() {
+        return columnas;
+    }
+
+    public void setColumnas(int columnas) {
+        this.columnas = columnas;
+    }
+    @Override
     public void actionPerformed(ActionEvent evt) {
         //Se obtiene la cantidad de filas a crear como una cadena de caracter
         String f = txtFilas.getText();
@@ -94,18 +113,14 @@ public class MatrizBoton extends JFrame implements ActionListener {
         panel.updateUI();
     }
 
-    public static void main(String args[]) {
-        try {
-            javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        new MatrizBoton().setVisible(true);
-    }
+//    public static void main(String args[]) {
+//        try {
+//            javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        new MatrizBoton().setVisible(true);
+//    }
 
-    JButton btnCrear;
-    JTextField txtColumnas;
-    JTextField txtFilas;
-    JPanel panel;
-    JScrollPane scrPane = new JScrollPane(panel);
+    
 }

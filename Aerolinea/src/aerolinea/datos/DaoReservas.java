@@ -46,7 +46,7 @@ public class DaoReservas {
 
         String sql = "insert into reservacion (idReserva, vuelo, "
                 + "Pago_id) "
-                + "values('%s','%s','%s','%s')";
+                + "values('%s','%s','%s')";
         sql = String.format(sql,u.getIdReserva(), u.getVuelo(),
                 u.getPago_id());
         int count = db.executeUpdate(sql);

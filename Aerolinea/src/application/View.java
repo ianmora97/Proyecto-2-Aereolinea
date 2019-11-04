@@ -174,7 +174,7 @@ public class View extends javax.swing.JFrame implements Observer {
             JOptionPane.showMessageDialog(this, "Entrada incorrecta");
         } else {
             Application.Perfil_Controller.getModel().setSesion(u);
-            JOptionPane.showMessageDialog(this, "Entrada Correcta");
+            this.setVisible(false);
             controladora.perfilShow();
         }
     }//GEN-LAST:event_jLabel4MouseClicked
