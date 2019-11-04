@@ -16,33 +16,46 @@ public class ModelVuelo {
     DaoVuelo vuelos;
 
     public ModelVuelo() {
-       vuelos = new DaoVuelo();
+        vuelos = new DaoVuelo();
     }
-    public int getCant() throws Exception{
+
+    public int getCant() throws Exception {
         return vuelos.getCantidadRegistros();
     }
+
     public void agregar(Vuelo v) throws Exception {
         vuelos.VuelosAdd(v);
     }
-    public Vuelo buscarPor(String a, String b, String c) throws Exception{
+
+    public Vuelo consultarPorRuta(String id) throws Exception {
+        Vuelo result = vuelos.porRuta(id);
+        return result;
+    }
+
+    public Vuelo buscarPor(String a, String b, String c) throws Exception {
         Vuelo r = vuelos.buscarPorVuelo(a, b, c);
         return r;
     }
-    public List<Vuelo> buscarEs(String a, String b, String c) throws Exception{
+
+    public List<Vuelo> buscarEs(String a, String b, String c) throws Exception {
         List<Vuelo> r = vuelos.VueloSearch(a, b, c);
         return r;
     }
-    public void eliminar(String a) throws Exception{
+
+    public void eliminar(String a) throws Exception {
 //        vuelos.AvionDelete(a);
     }
+
     public Vuelo consultar(String id) throws Exception {
 //        Vuelo result = vuelos.getAvion(id);
         return null;
     }
+
     public Vuelo editar(String id) throws Exception {
 //        Vuelo result = vuelos.getAvion(id);
         return null;
     }
+
     public void modificar(Vuelo v) throws Exception {
 //        vuelos.AvionUpdate(v);
     }
@@ -51,15 +64,17 @@ public class ModelVuelo {
         List<Vuelo> result = vuelos.VueloSearch(nombre);
         return result;
     }
+
     public List<Vuelo> buscarTodos() {
         List<Vuelo> result = vuelos.VueloSearchEO();
         return result;
     }
+
     public List<Vuelo> buscarDescuentoList() {
         List<Vuelo> result = vuelos.VueloSearchDescuento();
         return result;
     }
-    
+
     static ModelVuelo instancia;
 
     public static ModelVuelo instanciar() {

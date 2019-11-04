@@ -25,10 +25,12 @@ public class Controller {
         view.setControlador(this);
         view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         view.setTitle("Perfil");
-        model.setReservas(aerolinea.logica.ModelReservacion.instanciar().buscarTodos());
-        model.setTiquetes(aerolinea.logica.ModelTiquetes.instanciar().buscarTodos());
         view.cargarUsuario();
         this.view.crearSesion();
+        model.setReservas(aerolinea.logica.ModelReservacion.instanciar().buscarTodos());
+        model.setTiquetes(aerolinea.logica.ModelTiquetes.instanciar().buscarTodos());
+        
+        
         
     }
     public Tiquete consultar(String s) throws Exception{

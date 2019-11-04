@@ -26,7 +26,18 @@ public class DaoUsuario {
             return null;
         }
     }
-    
+    public Usuario getUsuarioPorCorreo(String id) throws Exception{
+
+        String sql="select * from usuario u where u.correo='%s'";
+        sql = String.format(sql,id);
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            return Usuario(rs);
+        }
+        else{
+            return null;
+        }
+    }
     public void UsuarioDelete(Usuario u) throws Exception{
         String sql="delete from usuario where idUsuario='%s'";
         sql = String.format(sql,u.getIdUsuario());

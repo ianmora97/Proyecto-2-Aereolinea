@@ -22,9 +22,12 @@ public class ModelUsuarios {
     public void agregar(Usuario v) throws Exception {
         usuarios.UsuarioAdd(v);
     }
-
     public Usuario consultar(String id) throws Exception {
         Usuario result = usuarios.getUsuario(id);
+        return result;
+    }
+    public Usuario consultarPorCorreo(String id) throws Exception {
+        Usuario result = usuarios.getUsuarioPorCorreo(id);
         return result;
     }
 

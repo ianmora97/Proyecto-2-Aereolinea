@@ -10,14 +10,31 @@ import aerolinea.Application;
 import aerolinea.logica.MetodoPago;
 import aerolinea.logica.Reservacion;
 import aerolinea.logica.Tiquete;
+import aerolinea.logica.Usuario;
+import aerolinea.logica.Vuelo;
 import java.awt.Color;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.LineSeparator;
+import java.awt.Desktop;
+import java.io.*; 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -36,8 +53,129 @@ public class View extends javax.swing.JFrame implements Observer{
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        generarFacturaBoton.setVisible(false);
+    }
+            
+    Reservacion reserva;
+    Tiquete tiquete;
+    MetodoPago metodo;
+    
+    private static final Font paragraphFont = FontFactory.getFont(FontFactory.HELVETICA, 12, Font.NORMAL);
+    private static final Font VUEL_FONT = new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK);
+    private static final Font PRECIO_FONT = new Font(Font.FontFamily.HELVETICA, 15, Font.BOLD, BaseColor.BLACK);
+
+    public void br(Chapter chapter,int i) {
+        Font ENTER_FONT = new Font(Font.FontFamily.HELVETICA, i, Font.NORMAL, BaseColor.WHITE);
+        chapter.add(new Paragraph("ENTER", ENTER_FONT));
     }
 
+    public void createPDF(File pdfNewFile) {
+        String linea = "";
+        Usuario u=null;
+        Vuelo vu = null;
+        try {
+            u = aerolinea.logica.ModelUsuarios.instanciar().consultarPorCorreo(metodo.getCorreoP());
+            vu = aerolinea.logica.ModelVuelo.instanciar().consultarPorRuta(reserva.getVuelo());
+        } catch (Exception ex) {
+            
+        }
+        try {
+            Document document = new Document();
+            try {
+
+                PdfWriter.getInstance((com.itextpdf.text.Document) document, new FileOutputStream(pdfNewFile));
+
+            } catch (FileNotFoundException fileNotFoundException) {
+                System.out.println("(No se encontró el fichero para generar el pdf)" + fileNotFoundException);
+            }
+            document.open();
+            // We add metadata to PDF
+            // Añadimos los metadatos del PDF
+            document.addTitle("Facturas");
+            document.addSubject("Facturas");
+            document.addKeywords("Facturas");
+            document.addAuthor("Ian Rodriguez");
+            document.addCreator("Ian Rodriguez");
+
+            Chapter chapter = new Chapter(1);
+            Font black = new Font(Font.FontFamily.HELVETICA, 36, Font.NORMAL, BaseColor.BLACK);
+            LineSeparator ls = new LineSeparator();
+            
+            chapter.add(new Chunk(ls));
+            br(chapter,10);
+            
+            chapter.add(new Chunk("Factura de Compra", black));
+            
+            br(chapter,15);
+            chapter.add(new Paragraph("Informacion del cliente", VUEL_FONT));
+            br(chapter,10);
+            linea = tiquete.getNumTiquete();
+            chapter.add(new Paragraph("Tiquete de compra numero: "+linea, paragraphFont));
+            br(chapter,5);
+            linea = u.getNombre() +" "+ u.getApellidos();
+            chapter.add(new Paragraph("Nombre de la persona: "+linea, paragraphFont));
+            br(chapter,5);
+            linea =u.getCorreo();
+            chapter.add(new Paragraph("Correo: "+linea, paragraphFont));
+            
+            chapter.add(new Chunk(ls));
+
+            chapter.add(new Paragraph("Pago:", VUEL_FONT));
+            br(chapter,10);
+            linea = metodo.getId();
+            chapter.add(new Paragraph("Metodo de pago: "+linea, paragraphFont));
+            br(chapter,5);
+            linea = metodo.getCardNum();
+            chapter.add(new Paragraph("Numero de Tarjeta: "+linea, paragraphFont));
+            br(chapter,5);
+            linea = metodo.getVemc();
+            chapter.add(new Paragraph("Vencimiento: "+linea, paragraphFont));
+            br(chapter,5);
+            linea = metodo.getHolder();
+            chapter.add(new Paragraph("Holder: "+linea, paragraphFont));
+
+            chapter.add(new Chunk(ls));
+
+            chapter.add(new Paragraph("Informacion del vuelo:", VUEL_FONT));
+            br(chapter,10);
+            
+            linea = vu.getIdVuelo();
+            chapter.add(new Paragraph("Id del Vuelo: "+linea, paragraphFont));
+            br(chapter,4);
+            linea = vu.getRuta().getCodigoRuta();
+            chapter.add(new Paragraph("Codigo de Ruta: "+linea, paragraphFont));
+            br(chapter,4);
+            linea = vu.getRuta().getCiudadDestino();
+            chapter.add(new Paragraph("Ciudad de Destino: "+linea, paragraphFont));
+            br(chapter,4);
+            linea = vu.getRuta().getCiudadOrigen();
+            chapter.add(new Paragraph("Ciudad de Origen: "+linea, paragraphFont));
+            br(chapter,4);
+            linea = vu.getHorario().getHoraSalida();
+            chapter.add(new Paragraph("Fecha de salida: "+linea, paragraphFont));
+            br(chapter,4);
+            linea = vu.getHorario().getHoraLlegada();
+            chapter.add(new Paragraph("Hora de salida: "+linea, paragraphFont));
+            br(chapter,4);
+            linea = vu.getAvion().getModelo() + " " + vu.getAvion().getMarca() + " " + vu.getAvion().getAnno();
+            chapter.add(new Paragraph("Tipo de Avion: "+linea, paragraphFont));
+            
+            chapter.add(new Chunk(ls));
+            chapter.add(new Chunk(ls));
+            
+            br(chapter,8);
+            linea = vu.getHorario().getPrecio();
+            chapter.add(new Paragraph("Total por pagar: $"+linea, PRECIO_FONT));
+
+            document.add(chapter);
+            document.close();
+            System.out.println("¡Se ha generado tu factura!");
+        } catch (DocumentException documentException) {
+            System.out.println("(Se ha producido un error al generar un documento): " + documentException);
+        }
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,6 +236,7 @@ public class View extends javax.swing.JFrame implements Observer{
         jLabel26 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        generarFacturaBoton = new javax.swing.JButton();
 
         jToolBar1.setRollover(true);
 
@@ -512,6 +651,13 @@ public class View extends javax.swing.JFrame implements Observer{
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        generarFacturaBoton.setText("Generar Factura");
+        generarFacturaBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                generarFacturaBotonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -565,7 +711,10 @@ public class View extends javax.swing.JFrame implements Observer{
                                             .addComponent(selectFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(108, 108, 108)
-                                .addComponent(jLabel24)))))
+                                .addComponent(jLabel24))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(134, 134, 134)
+                                .addComponent(generarFacturaBoton)))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -612,7 +761,9 @@ public class View extends javax.swing.JFrame implements Observer{
                                 .addGap(15, 15, 15)
                                 .addComponent(jLabel12)
                                 .addGap(47, 47, 47)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(generarFacturaBoton))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -722,7 +873,8 @@ public class View extends javax.swing.JFrame implements Observer{
         //checkIn
         
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    String idTiquete,vuelo;
+    
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         String metodoPago="",holder="",cardNum="",vence="",vcc="",correo="";
@@ -757,7 +909,7 @@ public class View extends javax.swing.JFrame implements Observer{
                 break;
 
         }
-        String idReserva,vuelo,idTiquete,user,asiento;
+        String idReserva,user,asiento;
         Random r = new Random();
         int asientoNumero = r.nextInt(180);
         char letra = (char)(r.nextInt(91) + 65);
@@ -772,18 +924,34 @@ public class View extends javax.swing.JFrame implements Observer{
         correo = Application.Perfil_Controller.getModel().getSesion().getCorreo();
         user = (Application.Perfil_Controller.getModel().getSesion().getIdUsuario());
         
-        Reservacion reserva = new Reservacion(idReserva,vuelo,metodoPago);
-        Tiquete tiquete = new Tiquete(idTiquete,idTiquete,user,asiento);
-        MetodoPago metodo = new MetodoPago(metodoPago,cardNum,vence,vcc,holder,correo);
+        reserva = new Reservacion(idReserva,vuelo,metodoPago);
+        tiquete = new Tiquete(idTiquete,idTiquete,user,asiento);
+        metodo = new MetodoPago(metodoPago,cardNum,vence,vcc,holder,correo);
         
         try {
-            controller.agregar(reserva, tiquete,metodo);
+            controller.agregar(reserva, tiquete, metodo);
             JOptionPane.showMessageDialog(this, "Compra exitosa");
+            generarFacturaBoton.setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Compra No fue realizada");
         }
-        this.setVisible(false);
+        
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void generarFacturaBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generarFacturaBotonMouseClicked
+        // TODO add your handling code here:
+        Usuario user = Application.Perfil_Controller.getModel().getSesion();
+        String factura;
+        factura = "FacturasGeneradas/"+user.getNombre()+user.getApellidos()+"-"+idTiquete+"-"+vuelo+".pdf";
+        createPDF(new File(factura));
+        generarFacturaBoton.setVisible(false);
+        
+        try {
+            Desktop.getDesktop().open(new File(factura));
+        } catch (IOException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_generarFacturaBotonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -801,6 +969,7 @@ public class View extends javax.swing.JFrame implements Observer{
     private javax.swing.JTextField VisaCardHolder;
     private javax.swing.JTextField VisaVcc;
     private javax.swing.JComboBox comboPagos;
+    private javax.swing.JButton generarFacturaBoton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

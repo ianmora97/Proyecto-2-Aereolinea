@@ -39,17 +39,35 @@ public class DaoVuelo {
             throw new Exception("Vuelo no Existe");
         }
     }
-
-    public Vuelo buscarPorVuelo(String destino, String origen, String fecha) throws Exception {
+    public Vuelo porRuta(String id) throws Exception {
 
         String sql = "select "
-                + "ruta, ciudadDestino, ciudadOrigen, fecha, "
-                + "horaSalida,horaLlegada,duracion, precio, numPasajeros, "
-                + "marca, modelo, anno   "
+                + "idvuelo, ruta, ciudadDestino, ciudadOrigen, fecha, "
+                    + "horaSalida,horaLlegada,duracion, precio, numPasajeros, "
+                    + "marca, modelo, anno "
                 + "from vuelo v "
                 + "inner join avion a on v.avion = a.idTipoAvion "
                 + "inner join ruta r on v.ruta = r.codigoRuta "
-                + "inner join horario h on v.horario = h.idhorario"
+                + "inner join horario h on v.horario = h.idhorario "
+                + "where v.ruta = '%s' ";
+        sql = String.format(sql, id);
+        ResultSet rs = db.executeQuery(sql);
+        if (rs.next()) {
+            return Vuelo(rs);
+        } else {
+            throw new Exception("Vuelo no Existe");
+        }
+    }
+    public Vuelo buscarPorVuelo(String destino, String origen, String fecha) throws Exception {
+
+        String sql = "select "
+                + "idvuelo, ruta, ciudadDestino, ciudadOrigen, fecha, "
+                    + "horaSalida,horaLlegada,duracion, precio, numPasajeros, "
+                    + "marca, modelo, anno "
+                + "from vuelo v "
+                + "inner join avion a on v.avion = a.idTipoAvion "
+                + "inner join ruta r on v.ruta = r.codigoRuta "
+                + "inner join horario h on v.horario = h.idhorario "
                 + "where "
                 + "r.ciudadDestino='%s' "
                 + "AND r.ciudadOrigen = '%s' "
@@ -62,7 +80,7 @@ public class DaoVuelo {
             throw new Exception("Vuelo no Existe");
         }
     }
-
+    
     public void VuelosAdd(Vuelo u) throws Exception {
 
         String sql = "insert into vuelo value('%s','%s','%s','%s') ";

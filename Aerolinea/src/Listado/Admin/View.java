@@ -1820,7 +1820,8 @@ public class View extends javax.swing.JFrame implements Observer {
             controller.deleteAviones(ModifcaridAvionesLabel1.getText());
             JOptionPane.showMessageDialog(this, "Avion Eliminado Correctamente");
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Avion no se pudo Eliminar");
+            JOptionPane.showMessageDialog(this, "Avion no se pudo Eliminar por \n"
+                    + "que existe un vuelo registrado con \neste avion o no existe");
         }
     }//GEN-LAST:event_eliminarAvionesMouseClicked
 

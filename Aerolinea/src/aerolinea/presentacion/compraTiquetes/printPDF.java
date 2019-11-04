@@ -4,12 +4,29 @@
  * and open the template in the editor.
  */
 package aerolinea.presentacion.compraTiquetes;
-//package aerolinea.iText;
-import com.sun.javafx.font.FontFactory;
-import java.awt.Font;
+
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.LineSeparator;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import javax.swing.text.Document;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -96,81 +113,143 @@ public class printPDF extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        
+        createPDF(new File("FacturasGeneradas/file1.pdf"));
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private static final Font paragraphFont = FontFactory.getFont(FontFactory.HELVETICA, 12, Font.NORMAL);
+    private static final Font VUEL_FONT = new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK);
+    private static final Font PRECIO_FONT = new Font(Font.FontFamily.HELVETICA, 15, Font.BOLD, BaseColor.BLACK);
+    private static final Font Visa_FONT = new Font(Font.FontFamily.HELVETICA, 18, Font.NORMAL, BaseColor.BLUE);
+
+    public void br(Chapter chapter,int i) {
+        Font ENTER_FONT = new Font(Font.FontFamily.HELVETICA, i, Font.NORMAL, BaseColor.WHITE);
+        chapter.add(new Paragraph("ENTER", ENTER_FONT));
+    }
+
+    public void createPDF(File pdfNewFile) {
+        // We create the document and set the file name.        
+        // Creamos el documento e indicamos el nombre del fichero.
+        try {
+            Document document = new Document();
+            try {
+
+                PdfWriter.getInstance((com.itextpdf.text.Document) document, new FileOutputStream(pdfNewFile));
+
+            } catch (FileNotFoundException fileNotFoundException) {
+                System.out.println("(No se encontró el fichero para generar el pdf)" + fileNotFoundException);
+            }
+            document.open();
+            // We add metadata to PDF
+            // Añadimos los metadatos del PDF
+            document.addTitle("Facturas");
+            document.addSubject("Facturas");
+            document.addKeywords("Facturas");
+            document.addAuthor("Ian Rodriguez");
+            document.addCreator("Ian Rodriguez");
+
+            Chapter chapter = new Chapter(1);
+            Font black = new Font(Font.FontFamily.HELVETICA, 36, Font.NORMAL, BaseColor.BLACK);
+            LineSeparator ls = new LineSeparator();
+            
+            chapter.add(new Chunk(ls));
+            br(chapter,10);
+            
+            chapter.add(new Chunk("Factura de Compra", black));
+            
+            br(chapter,15);
+            chapter.add(new Paragraph("Informacion del cliente", VUEL_FONT));
+            br(chapter,10);
+            chapter.add(new Paragraph("Tiquete de compra numero 1", paragraphFont));
+            br(chapter,5);
+            chapter.add(new Paragraph("Nombre de la persona + @", paragraphFont));
+            br(chapter,5);
+            chapter.add(new Paragraph("Correo: + @", paragraphFont));
+            
+            chapter.add(new Chunk(ls));
+
+            chapter.add(new Paragraph("Pago:", VUEL_FONT));
+            br(chapter,10);
+            chapter.add(new Paragraph("Metodo de pago: + @", paragraphFont));
+            br(chapter,5);
+            chapter.add(new Paragraph("Numero de Tarjeta: + @", paragraphFont));
+            br(chapter,5);
+            chapter.add(new Paragraph("Vencimiento: + @", paragraphFont));
+            br(chapter,5);
+            chapter.add(new Paragraph("Holder: + @", paragraphFont));
+
+            chapter.add(new Chunk(ls));
+
+            chapter.add(new Paragraph("Informacion del vuelo:", VUEL_FONT));
+            br(chapter,10);
+            chapter.add(new Paragraph("IdVuelo: + @", paragraphFont));
+            br(chapter,4);
+            chapter.add(new Paragraph("Ruta: + @", paragraphFont));
+            br(chapter,4);
+            chapter.add(new Paragraph("Ciudad de Destino: + @", paragraphFont));
+            br(chapter,4);
+            chapter.add(new Paragraph("Ciudad de Origen: + @", paragraphFont));
+            br(chapter,4);
+            chapter.add(new Paragraph("Fecha de salida: + @", paragraphFont));
+            br(chapter,4);
+            chapter.add(new Paragraph("Hora de salida: + @", paragraphFont));
+            br(chapter,4);
+            chapter.add(new Paragraph("Hora de Llegada: + @", paragraphFont));
+            br(chapter,4);
+            chapter.add(new Paragraph("Cantidad de pasajeros: + @", paragraphFont));
+            br(chapter,4);
+            chapter.add(new Paragraph("Tipo de Avion: + @", paragraphFont));
+            
+            chapter.add(new Chunk(ls));
+            chapter.add(new Chunk(ls));
+            
+            chapter.add(new Paragraph("Total por pagar: $", paragraphFont));
+            chapter.add(new Paragraph("@", PRECIO_FONT));
+
+            document.add(chapter);
+            document.close();
+            System.out.println("¡Se ha generado tu factura!");
+        } catch (DocumentException documentException) {
+            System.out.println("(Se ha producido un error al generar un documento): " + documentException);
+        }
+    }
 
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(printPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(printPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(printPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(printPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new printPDF().setVisible(true);
-//            }
-//        });
-//    }
-//    private static final Font chapterFont = FontFactory.getFont(FontFactory.HELVETICA, 26, Font.BOLDITALIC);
-//    private static final Font paragraphFont = FontFactory.getFont(FontFactory.HELVETICA, 12, Font.NORMAL);
-//        
-//    private static final Font categoryFont = new Font(Font.TIMES_ROMAN, 18, Font.BOLD);
-//    private static final Font subcategoryFont = new Font(Font.TIMES_ROMAN, 16, Font.BOLD);
-//    private static final Font blueFont = new Font(Font.TIMES_ROMAN, 12, Font.NORMAL);    
-//    private static final Font smallBold = new Font(Font.TIMES_ROMAN, 12, Font.BOLD);
-//    
-//    private static final String iTextExampleImage = "/home/xules/codigoxules/iText-Example-image.png";
-//    /**
-//     * We create a PDF document with iText using different elements to learn 
-//     * to use this library.
-//     * Creamos un documento PDF con iText usando diferentes elementos para aprender 
-//     * a usar esta librería.
-//     * @param pdfNewFile  <code>String</code> 
-//     *      pdf File we are going to write. 
-//     *      Fichero pdf en el que vamos a escribir. 
-//     */
-//    public void createPDF(File pdfNewFile) {
-//        // Aquí introduciremos el código para crear el PDF.
-//        try {
-//            Document document = new Document();
-//            try {
-//                PdfWriter.getInstance(document, new FileOutputStream(pdfNewFile));
-//            } catch (FileNotFoundException fileNotFoundException) {
-//                System.out.println("No such file was found to generate the PDF "
-//                        + "(No se encontró el fichero para generar el pdf)" + fileNotFoundException);
-//            }
-//            document.open();
-//
-//            // AQUÍ COMPLETAREMOS NUESTRO CÓDIGO PARA GENERAR EL PDF
-//
-//            document.close();
-//            System.out.println("Your PDF file has been generated!(¡Se ha generado tu hoja PDF!");
-//        } catch (DocumentException documentException) {
-//            System.out.println("The file not exists (Se ha producido un error al generar un documento): " + documentException);
-//        }
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(printPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(printPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(printPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(printPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                printPDF generatePDFFileIText = new printPDF();
+                generatePDFFileIText.setVisible(true);
+            }
+        });
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

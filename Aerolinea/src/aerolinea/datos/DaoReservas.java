@@ -71,9 +71,11 @@ public class DaoReservas {
     public List<Reservacion> ReservacionSearch(String horario) {
         List<Reservacion> resultado = new ArrayList<>();
         try {
-            String sql = "select * "
+            String sql = "select idReserva, vuelo, Pago_id "
                     + "from reservacion u "
-                    + "where u.idReserva like '%%%s%%'";
+                    + "inner join tiquete t on t.reserva = u.idReserva "
+                    + "inner join usuario d on d.idUsuario = t.Usuario_id "
+                    + "where d.idUsuario = '%s'";
             sql = String.format(sql, horario);
             ResultSet rs = db.executeQuery(sql);
             while (rs.next()) {

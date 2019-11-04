@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -43,9 +44,11 @@ public class DaoMetodoPago {
     }
 
     public void MetodoPagoAdd(MetodoPago u) throws Exception {
-
+        Random random = new Random();
+        int r = random.nextInt(500);
+        String a = u.getId()+ r;
         String sql = "insert into metodopago values('%s','%s','%s','%s','%s','%s')";
-        sql = String.format(sql,u.getId(), u.getCardNum(), u.getVemc(),
+        sql = String.format(sql,a, u.getCardNum(), u.getVemc(),
                 u.getVcc(), u.getHolder(), u.getCorreoP());
         int count = db.executeUpdate(sql);
         if (count == 0) {
@@ -54,6 +57,7 @@ public class DaoMetodoPago {
     }
 
     public void MetodoPagoUpdate(MetodoPago u) throws Exception {
+
         String sql = "update metodopago set idMetodo = '%s', cardNum='%s' "
                 + ",vencimiento='%s', vcc='%s',"
                 + " holder='%s', correoP='%s'"
